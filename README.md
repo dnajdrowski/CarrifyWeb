@@ -4,6 +4,8 @@
 
 **CEO & Developers:** Krzysztof Serocki and Daniel Najdrowski
 
+**Contact:** ___carrifydevelopment@gmail.com___
+
 ### WEB-APP-GOALS:
 - management of clients registered in android application,
 - management of cars connected in android applications,
@@ -24,7 +26,7 @@
 ## DEVELOPMENT PROCESS:
 - [x] Create UML diagrams.
 - [x] Create database diagram and business logic.
-- [ ] Create database for our Web and Android application.
+- [x] Create database for our Web and Android application.
 - [ ] Create REST API for Web and Android application.
 - [ ] Create Android application.
 - [ ] Create WEB Application.
@@ -52,6 +54,17 @@
 - ButterKnife
 - Google Maps API v2
 
-## DATABASE DIAGRAM:
+## DATABASE:
+
+#### DATABASE CREDENTIALS:
+
+1. Go to [db4free](https://www.db4free.net/phpMyAdmin/index.php)
+2. Sign in using credentials below:
+``` 
+  login: carryifyadmin
+  password: Carrifyadmin123
+```
+3. Feel free to use it.
+#### DATABASE DIAGRAM:
 ![DATABASE DIAGRAM](https://github.com/dnajdrowski/CarrifyWeb/blob/master/DATABASE/CarrifyDatabase.png)
 
