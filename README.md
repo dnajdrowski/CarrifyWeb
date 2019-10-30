@@ -22,7 +22,8 @@
  - the possibility of reporting a problem using the application form
 
 ## DEVELOPMENT PROCESS:
-- [ ] Create database diagram and business logic.
+- [x] Create UML diagrams.
+- [x] Create database diagram and business logic.
 - [ ] Create database for our Web and Android application.
 - [ ] Create REST API for Web and Android application.
 - [ ] Create Android application.
@@ -50,4 +51,7 @@
 - Rx2Java
 - ButterKnife
 - Google Maps API v2
+
+## DATABASE DIAGRAM:
+![DATABASE DIAGRAM](https://github.com/dnajdrowski/CarrifyWeb/blob/master/DATABASE/CarrifyDatabase.png)
 
