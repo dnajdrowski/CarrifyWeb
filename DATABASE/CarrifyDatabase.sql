@@ -1,5 +1,5 @@
 CREATE TABLE `users` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(255) UNIQUE NOT NULL,
   `phone` varchar(255) UNIQUE NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -7,20 +7,20 @@ CREATE TABLE `users` (
   `email` varchar(255) UNIQUE NOT NULL,
   `latitude` double,
   `longitude` double,
-  `role_id` long
+  `role_id` int
 );
 
 CREATE TABLE `card` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `card_number` char(16) NOT NULL,
   `expire_year` char(4) NOT NULL,
   `expire_month` char(2) NOT NULL,
   `card_cvv` char(3) NOT NULL,
-  `user_id` long NOT NULL
+  `user_id` int NOT NULL
 );
 
 CREATE TABLE `car` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `fuel_level` int NOT NULL,
   `last_sync` datetime,
@@ -32,17 +32,17 @@ CREATE TABLE `car` (
 );
 
 CREATE TABLE `car_location_log` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `car_id` long NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `car_id` int NOT NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
   `created_at` datetime NOT NULL
 );
 
 CREATE TABLE `rent` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `user_id` long NOT NULL,
-  `car_id` long NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `car_id` int NOT NULL,
   `distance` double NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL,
   `end_at` datetime,
@@ -50,35 +50,35 @@ CREATE TABLE `rent` (
 );
 
 CREATE TABLE `rent_location_log` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `rent_id` long NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `rent_id` int NOT NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
   `created_at` datetime NOT NULL
 );
 
 CREATE TABLE `role` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) NOT NULL
 );
 
 CREATE TABLE `users_wallet` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `user_id` long NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int NOT NULL,
   `amount` int NOT NULL DEFAULT 0,
   `last_update` datetime NOT NULL
 );
 
 CREATE TABLE `transaction` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `rent_id` long NOT NULL,
-  `user_id` long NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `rent_id` int NOT NULL,
+  `user_id` int NOT NULL,
   `amount` int NOT NULL,
   `created_at` datetime NOT NULL
 );
 
 CREATE TABLE `coupons` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `value` varchar(255) NOT NULL,
   `name` varchar(255),
   `amount` int NOT NULL,
@@ -86,37 +86,37 @@ CREATE TABLE `coupons` (
 );
 
 CREATE TABLE `user_coupon` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `user_id` long NOT NULL,
-  `coupon_id` long NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `coupon_id` int NOT NULL,
   `created_at` datetime NOT NULL
 );
 
 CREATE TABLE `reservation` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `user_id` long NOT NULL,
-  `car_id` long NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `car_id` int NOT NULL,
   `state` int NOT NULL,
   `can_extend` int NOT NULL,
   `created_at` datetime NOT NULL
 );
 
 CREATE TABLE `variables` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL
 );
 
 CREATE TABLE `report` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
-  `user_id` long NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL
 );
 
 CREATE TABLE `region_zone` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `stroke_width` int NOT NULL,
   `stroke_color` varchar(255) NOT NULL,
   `stroke_alpha` int NOT NULL,
@@ -126,10 +126,10 @@ CREATE TABLE `region_zone` (
 );
 
 CREATE TABLE `region_zone_coords` (
-  `id` long PRIMARY KEY AUTO_INCREMENT,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
-  `region_zone_id` long NOT NULL,
+  `region_zone_id` int NOT NULL,
   `created_at` datetime NOT NULL
 );
 
@@ -162,3 +162,5 @@ ALTER TABLE `reservation` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 ALTER TABLE `report` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `region_zone_coords` ADD FOREIGN KEY (`region_zone_id`) REFERENCES `region_zone` (`id`);
+
+
