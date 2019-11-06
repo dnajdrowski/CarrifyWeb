@@ -10,6 +10,13 @@ CREATE TABLE `users` (
   `role_id` int
 );
 
+CREATE TABLE `driver_licence` (
+`id` int PRIMARY KEY AUTO_INCREMENT,
+`img_front` LONGBLOB NOT NULL,
+`img_revers` LONGBLOB NOT NULL,
+`user_id` int NOT NULL
+);
+
 CREATE TABLE `card` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `card_number` char(16) NOT NULL,
@@ -24,7 +31,7 @@ CREATE TABLE `car` (
   `name` varchar(255) NOT NULL,
   `fuel_level` int NOT NULL,
   `last_sync` datetime,
-  `registration_nuber` varchar(255) UNIQUE NOT NULL,
+  `registration_number` varchar(255) UNIQUE NOT NULL,
   `service_mode` int NOT NULL,
   `mileage` int NOT NULL,
   `last_service` datetime,
@@ -62,7 +69,7 @@ CREATE TABLE `role` (
   `name` varchar(255) NOT NULL
 );
 
-CREATE TABLE `users_wallet` (
+CREATE TABLE `user_wallet` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `amount` int NOT NULL DEFAULT 0,
@@ -137,6 +144,8 @@ ALTER TABLE `users` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
 
 ALTER TABLE `card` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
+ALTER TABLE `driver_licence` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
 ALTER TABLE `car_location_log` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 
 ALTER TABLE `rent` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
@@ -145,7 +154,7 @@ ALTER TABLE `rent` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 
 ALTER TABLE `rent_location_log` ADD FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`);
 
-ALTER TABLE `users_wallet` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `user_wallet` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `transaction` ADD FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`);
 
