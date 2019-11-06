@@ -54,6 +54,23 @@
 - ButterKnife
 - Google Maps API v2
 
+## API:
+Application is deployed to [Heroku](https://www.heroku.com)
+
+Heroku Credentials:
+```
+  email: carrifydevelopment@gmail.com
+  password: Carrifyadmin123!!
+```
+
+API is available on the
+```
+  https://carrify.herokuapp.com/api
+```
+When API is not used for a while, application stops and restarts after first request.
+
+In this case first request may take longer to process.
+
 ## DATABASE:
 
 #### DATABASE CREDENTIALS:
