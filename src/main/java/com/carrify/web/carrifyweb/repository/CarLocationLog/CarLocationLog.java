@@ -1,5 +1,6 @@
-package com.carrify.web.carrifyweb.model;
+package com.carrify.web.carrifyweb.repository.CarLocationLog;
 
+import com.carrify.web.carrifyweb.repository.Car.Car;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

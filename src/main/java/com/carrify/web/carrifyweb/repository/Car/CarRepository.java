@@ -1,6 +1,5 @@
-package com.carrify.web.carrifyweb.repository;
+package com.carrify.web.carrifyweb.repository.Car;
 
-import com.carrify.web.carrifyweb.model.Car;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

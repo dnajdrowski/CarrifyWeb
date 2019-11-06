@@ -1,11 +1,10 @@
 package com.carrify.web.carrifyweb.service;
 
-import com.carrify.web.carrifyweb.model.Car;
-import com.carrify.web.carrifyweb.repository.CarRepository;
+import com.carrify.web.carrifyweb.repository.Car.Car;
+import com.carrify.web.carrifyweb.repository.Car.CarRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.toList;

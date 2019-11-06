@@ -1,4 +1,4 @@
-package com.carrify.web.carrifyweb.model;
+package com.carrify.web.carrifyweb.repository.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

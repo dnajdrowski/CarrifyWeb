@@ -1,11 +1,11 @@
-package com.carrify.web.carrifyweb.model;
+package com.carrify.web.carrifyweb.repository.Car;
 
+import com.carrify.web.carrifyweb.repository.CarLocationLog.CarLocationLog;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Date;

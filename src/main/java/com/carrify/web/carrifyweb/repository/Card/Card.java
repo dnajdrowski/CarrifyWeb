@@ -1,5 +1,6 @@
-package com.carrify.web.carrifyweb.model;
+package com.carrify.web.carrifyweb.repository.Card;
 
+import com.carrify.web.carrifyweb.repository.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
