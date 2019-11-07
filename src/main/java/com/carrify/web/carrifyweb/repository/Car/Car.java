@@ -1,22 +1,18 @@
 package com.carrify.web.carrifyweb.repository.Car;
 
 import com.carrify.web.carrifyweb.repository.CarLocationLog.CarLocationLog;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity(name = "car")
 public class Car {
 
@@ -32,7 +28,7 @@ public class Car {
     private Integer fuelLevel;
 
     @Column(name = "last_sync")
-    private Date lastSync;
+    private LocalDateTime lastSync;
 
     @Column(name = "registration_number", nullable = false, unique = true)
     private String registrationNumber;
@@ -44,11 +40,12 @@ public class Car {
     private Integer mileage;
 
     @Column(name = "last_service")
-    private LocalDate lastService;
+    private LocalDateTime lastService;
     @Column(name = "car_state", nullable = false)
     private Integer carState;
 
     @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<CarLocationLog> carLocationLogs = new ArrayList<>();
 

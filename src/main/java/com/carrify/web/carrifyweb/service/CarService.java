@@ -1,6 +1,7 @@
 package com.carrify.web.carrifyweb.service;
 
 import com.carrify.web.carrifyweb.repository.Car.Car;
+import com.carrify.web.carrifyweb.repository.Car.CarDTO;
 import com.carrify.web.carrifyweb.repository.Car.CarRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,10 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public List<Car> getAllCars() {
-        return StreamSupport.stream(carRepository.findAll().spliterator(), false)
+    public List<CarDTO> getAllCars() {
+        Iterable<Car> cars = carRepository.findAll();
+        return StreamSupport.stream(cars.spliterator(), false)
+                .map(CarDTO::new)
                 .collect(toList());
     }
 }

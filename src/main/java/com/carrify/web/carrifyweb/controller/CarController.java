@@ -1,6 +1,8 @@
 package com.carrify.web.carrifyweb.controller;
 
-import com.carrify.web.carrifyweb.repository.Car.Car;
+import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
+import com.carrify.web.carrifyweb.repository.Car.CarDTO;
+import com.carrify.web.carrifyweb.response.ApiResponseConstants;
 import com.carrify.web.carrifyweb.service.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +23,13 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping({"","/"})
-    public ResponseEntity<List<Car>> showAllCarsFleet() {
-        return ResponseEntity.ok(carService.getAllCars());
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<List<CarDTO>> showAllCarsFleet(){
+        List<CarDTO> cars = carService.getAllCars();
+        if(!cars.isEmpty()) {
+            return ResponseEntity.ok(cars);
+        } else {
+            throw new ApiNotFoundException(ApiResponseConstants.CARRIFY001_MSG, ApiResponseConstants.CARRIFY001_CODE);
+        }
     }
 }
