@@ -33,7 +33,7 @@ public class LoginController {
     }
 
     @PostMapping({"", "/"})
-    public ResponseEntity authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult bindingResult) {
+    public ResponseEntity loginUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             throw new ApiBadRequestException(ApiResponseConstants.CARRIFY002_MSG, ApiResponseConstants.CARRIFY002_CODE);
         }

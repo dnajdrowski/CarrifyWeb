@@ -30,7 +30,7 @@ public class User {
     private String password;
 
     @Column(name = "personal_number", nullable = false, unique = true)
-    private String personaNumber;
+    private String personalNumber;
 
     @Column(name = "latitude")
     private Double latitude;
@@ -53,5 +53,12 @@ public class User {
     @JsonManagedReference
     private List<Card> cards = new ArrayList<>();
 
+    public User(String username, String password, String personalNumber, String email, String phone) {
+        this.username = username;
+        this.password = password;
+        this.personalNumber = personalNumber;
+        this.email = email;
+        this.phone = phone;
+    }
 }
 
