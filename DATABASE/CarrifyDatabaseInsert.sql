@@ -6,7 +6,7 @@ VALUES
 ('ADMIN');
 
 INSERT INTO
- `users` (`username`, `phone`, `password`, `pesel`, `email`, `latitude`, `longitude`, `role_id`)
+ `users` (`username`, `phone`, `password`, `personal_number`, `email`, `latitude`, `longitude`, `role_id`)
 VALUES
 ('user1', '656454343', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '98091008874', 'jankowal@gmail.com', null, null, 1),
 ('user2', '934323423', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi','97101034345', 'dnajdrowski@gmail.com', null, null, 2),

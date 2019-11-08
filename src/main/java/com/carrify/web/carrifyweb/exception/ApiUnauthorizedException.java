@@ -5,10 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Getter
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class ApiNotFoundException extends ApiException {
+@ResponseStatus(HttpStatus.UNAUTHORIZED)
+public class ApiUnauthorizedException extends ApiException {
 
-    public ApiNotFoundException(String msg, String code) {
+    public ApiUnauthorizedException(String msg, String code) {
         super(msg, code);
     }
 }

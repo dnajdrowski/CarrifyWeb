@@ -3,7 +3,7 @@ CREATE TABLE `users` (
   `username` varchar(255) UNIQUE NOT NULL,
   `phone` varchar(255) UNIQUE NOT NULL,
   `password` varchar(255) NOT NULL,
-  `pesel` char(11) UNIQUE NOT NULL,
+  `personal_number` char(11) UNIQUE NOT NULL,
   `email` varchar(255) UNIQUE NOT NULL,
   `latitude` double,
   `longitude` double,

@@ -16,4 +16,16 @@ public class ApiResponseEntityExceptionHandler {
         ApiResponse response = new ApiResponse(e.getCode(), e.getMsg());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
+
+    @ExceptionHandler(ApiBadRequestException.class)
+    public ResponseEntity<ApiResponse> resolveBadRequestException(ApiBadRequestException e) {
+        ApiResponse response = new ApiResponse(e.getCode(), e.getMsg());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(ApiUnauthorizedException.class)
+    public ResponseEntity<ApiResponse> resolveUnauthorizedException(ApiUnauthorizedException e) {
+        ApiResponse response = new ApiResponse(e.getCode(), e.getMsg());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+    }
 }

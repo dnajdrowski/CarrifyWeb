@@ -1,6 +1,7 @@
 package com.carrify.web.carrifyweb.repository.Card;
 
 import com.carrify.web.carrifyweb.repository.User.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,8 +33,9 @@ public class Card {
     @Column(name = "card_cvv", nullable = false, length = 3)
     private String cardCVV;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
 }
