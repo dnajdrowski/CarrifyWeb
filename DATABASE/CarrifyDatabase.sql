@@ -7,7 +7,8 @@ CREATE TABLE `users` (
   `email` varchar(255) UNIQUE NOT NULL,
   `latitude` double,
   `longitude` double,
-  `role_id` int
+  `role_id` int,
+  `token` varchar(255) UNIQUE
 );
 
 CREATE TABLE `driver_licence` (

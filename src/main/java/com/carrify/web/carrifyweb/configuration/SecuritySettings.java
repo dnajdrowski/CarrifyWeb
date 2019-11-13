@@ -1,7 +1,5 @@
 package com.carrify.web.carrifyweb.configuration;
 
-import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
-import com.carrify.web.carrifyweb.exception.ApiUnauthorizedException;
 import com.carrify.web.carrifyweb.security.JwtAuthenticationEntryPoint;
 import com.carrify.web.carrifyweb.security.JwtAuthenticationFilter;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;
@@ -16,15 +14,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -40,10 +31,10 @@ public class SecuritySettings extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
     private final PasswordEncoder passwordEncoder;
 
-    public SecuritySettings(CustomUserDetailsService customUserDetailsService, JwtTokenProvider provider,
+    public SecuritySettings(CustomUserDetailsService customUserDetailsService, JwtTokenProvider jwtTokenProvider,
                             JwtAuthenticationEntryPoint unauthorizedHandler, PasswordEncoder passwordEncoder) {
         this.customUserDetailsService = customUserDetailsService;
-        this.jwtTokenProvider = provider;
+        this.jwtTokenProvider = jwtTokenProvider;
         this.unauthorizedHandler = unauthorizedHandler;
         this.passwordEncoder = passwordEncoder;
     }

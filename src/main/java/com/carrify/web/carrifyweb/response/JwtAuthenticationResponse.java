@@ -9,7 +9,6 @@ public class JwtAuthenticationResponse {
 
     private String accessToken;
     private String userId;
-    private String tokenType = "Bearer";
 
     public JwtAuthenticationResponse(String accessToken, String userId) {
         this.accessToken = accessToken;

@@ -7,6 +7,7 @@ import com.carrify.web.carrifyweb.request.RegisterRequest;
 import com.carrify.web.carrifyweb.response.ApiResponseConstants;
 import com.carrify.web.carrifyweb.service.RoleService;
 import com.carrify.web.carrifyweb.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
+@Slf4j
 @RequestMapping("/register")
 public class RegisterController {
 
@@ -57,12 +59,13 @@ public class RegisterController {
         User user = new User(registerRequest.getUsername(), registerRequest.getPassword(),
                 registerRequest.getPersonalNumber(), registerRequest.getEmail(), registerRequest.getPhone());
 
-        user.setPassword(passwordEncoder.encode(user.getEmail()));
+        String password = passwordEncoder.encode(user.getPassword());
+        log.info(password);
+        user.setPassword(password);
 
         Optional<Role> role = roleService.findRoleByName("USER");
         role.ifPresent(user::setRole);
 
-        //TODO what if role cannot be find and what if user somehow has not been saved
         User savedUser = userService.saveUser(user);
         if(savedUser != null) {
             return ResponseEntity.ok().build();

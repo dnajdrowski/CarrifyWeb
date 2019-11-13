@@ -44,6 +44,9 @@ public class User {
     @Column(name = "phone", length = 9, unique = true)
     private String phone;
 
+    @Column(name = "token", unique = true)
+    private String token;
+
     @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;

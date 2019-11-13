@@ -6,6 +6,7 @@ import com.carrify.web.carrifyweb.request.LoginRequest;
 import com.carrify.web.carrifyweb.response.ApiResponseConstants;
 import com.carrify.web.carrifyweb.response.JwtAuthenticationResponse;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
+@Slf4j
 @RequestMapping("/login")
 public class LoginController {
 
@@ -58,6 +60,7 @@ public class LoginController {
         }
         String token = verifyRequest.getAccessToken();
         if(token != null && tokenProvider.validateToken(token)) {
+            log.info("wtf");
             Integer userId = tokenProvider.getUserIdFromJWT(token);
             return ResponseEntity.ok(userId);
         } else {

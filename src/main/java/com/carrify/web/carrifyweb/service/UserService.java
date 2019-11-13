@@ -1,12 +1,23 @@
 package com.carrify.web.carrifyweb.service;
 
+import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
+import com.carrify.web.carrifyweb.exception.ApiUnauthorizedException;
 import com.carrify.web.carrifyweb.repository.User.User;
 import com.carrify.web.carrifyweb.repository.User.UserRepository;
+import com.carrify.web.carrifyweb.response.ApiResponseConstants;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Check;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.carrify.web.carrifyweb.response.ApiResponseConstants.CARRIFY008_CODE;
+import static com.carrify.web.carrifyweb.response.ApiResponseConstants.CARRIFY008_MSG;
+
+
 @Service
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -33,5 +44,18 @@ public class UserService {
 
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    public User saveUserToken(Integer userId, String token) {
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new ApiNotFoundException(ApiResponseConstants.CARRIFY009_MSG, ApiResponseConstants.CARRIFY009_CODE));
+
+        user.setToken(token);
+        return userRepository.save(user);
+    }
+
+    public boolean checkIfTokenMatchesToUser(String token, Integer userId) {
+        Optional<User> user = userRepository.findByToken(token);
+        return user.filter(value -> userId.equals(value.getUserId())).isPresent();
     }
 }
