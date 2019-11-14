@@ -60,7 +60,6 @@ public class LoginController {
         }
         String token = verifyRequest.getAccessToken();
         if(token != null && tokenProvider.validateToken(token)) {
-            log.info("wtf");
             Integer userId = tokenProvider.getUserIdFromJWT(token);
             return ResponseEntity.ok(userId);
         } else {
