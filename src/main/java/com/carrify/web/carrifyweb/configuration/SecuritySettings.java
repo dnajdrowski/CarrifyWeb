@@ -86,4 +86,9 @@ public class SecuritySettings extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
+    @Override
+    public void configure(WebSecurity web)  {
+        web.ignoring().antMatchers("/auth/**");
+    }
 }
