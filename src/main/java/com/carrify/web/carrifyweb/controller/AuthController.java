@@ -96,6 +96,7 @@ public class AuthController {
             return ResponseEntity.ok(authResponse);
         } else {
             authResponse.setAction("WE3ceg6");
+            authResponse.setPhoneNumber(request.getPhone());
             return ResponseEntity.ok(authResponse);
         }
     }
