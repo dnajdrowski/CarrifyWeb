@@ -1,19 +1,13 @@
 package com.carrify.web.carrifyweb.service;
 
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
-import com.carrify.web.carrifyweb.exception.ApiUnauthorizedException;
 import com.carrify.web.carrifyweb.repository.User.User;
 import com.carrify.web.carrifyweb.repository.User.UserRepository;
 import com.carrify.web.carrifyweb.response.ApiResponseConstants;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.Check;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-import static com.carrify.web.carrifyweb.response.ApiResponseConstants.CARRIFY008_CODE;
-import static com.carrify.web.carrifyweb.response.ApiResponseConstants.CARRIFY008_MSG;
 
 
 @Service
