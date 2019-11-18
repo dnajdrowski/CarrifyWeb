@@ -37,9 +37,6 @@ public class SecuritySettings extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
     private final PasswordEncoder passwordEncoder;
 
-    private static final RequestMatcher PROTECTED_URLS = new OrRequestMatcher(
-            new AntPathRequestMatcher("/api/**"));
-
     public SecuritySettings(CustomUserDetailsService customUserDetailsService, JwtTokenProvider jwtTokenProvider,
                             JwtAuthenticationEntryPoint unauthorizedHandler, PasswordEncoder passwordEncoder) {
         this.customUserDetailsService = customUserDetailsService;
@@ -79,20 +76,14 @@ public class SecuritySettings extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
+                .anonymous()
+                    .and()
                 .authorizeRequests()
-                    .requestMatchers(PROTECTED_URLS)
-                    .authenticated();
-//                .authorizeRequests()
-//                    .antMatchers("/auth/**")
-//                        .permitAll()
-//                    .anyRequest()
-//                        .authenticated();
+                    .antMatchers("/auth/**")
+                        .permitAll()
+                    .anyRequest()
+                        .authenticated();
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/auth/**");
     }
 }
