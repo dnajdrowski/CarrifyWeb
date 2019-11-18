@@ -31,9 +31,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try {
             String jwt = getJwtFromRequest(request);
-            log.info(jwt);
+            log.info("Token: " + jwt);
             if (jwt != null && !jwt.isEmpty() && jwtTokenProvider.validateToken(jwt)) {
-                log.info("ok");
                 Integer userId = jwtTokenProvider.getUserIdFromJWT(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserById(userId);
@@ -52,6 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
+        log.info(bearerToken);
         if (!bearerToken.isEmpty() && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
