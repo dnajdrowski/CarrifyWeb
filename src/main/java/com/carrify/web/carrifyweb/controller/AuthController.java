@@ -68,7 +68,7 @@ public class AuthController {
     }
 
     @PostMapping("/verifyToken")
-    public ResponseEntity verifyToken(@Valid JwtVerifyTokenRequest verifyRequest, BindingResult bindingResult) {
+    public ResponseEntity verifyToken(@Valid @RequestBody JwtVerifyTokenRequest verifyRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new ApiBadRequestException(ApiResponseConstants.CARRIFY003_MSG, ApiResponseConstants.CARRIFY003_CODE);
         }
