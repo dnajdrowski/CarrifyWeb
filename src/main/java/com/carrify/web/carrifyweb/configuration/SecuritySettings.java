@@ -79,7 +79,9 @@ public class SecuritySettings extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
-                .requestMatcher(PROTECTED_URLS);
+                .authorizeRequests()
+                    .requestMatchers(PROTECTED_URLS)
+                    .authenticated();
 //                .authorizeRequests()
 //                    .antMatchers("/auth/**")
 //                        .permitAll()
