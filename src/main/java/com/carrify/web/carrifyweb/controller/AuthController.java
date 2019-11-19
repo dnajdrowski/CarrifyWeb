@@ -2,6 +2,7 @@ package com.carrify.web.carrifyweb.controller;
 
 import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
 import com.carrify.web.carrifyweb.exception.ApiException;
+import com.carrify.web.carrifyweb.exception.ApiUnauthorizedException;
 import com.carrify.web.carrifyweb.repository.Role.Role;
 import com.carrify.web.carrifyweb.repository.User.User;
 import com.carrify.web.carrifyweb.request.AuthRequest;
@@ -77,7 +78,7 @@ public class AuthController {
             Integer userId = jwtTokenProvider.getUserIdFromJWT(token);
             return ResponseEntity.ok(userId);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            throw new ApiUnauthorizedException(CARRIFY002_MSG,CARRIFY002_CODE);
         }
     }
 
