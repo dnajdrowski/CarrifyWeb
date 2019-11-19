@@ -1,6 +1,6 @@
-package com.carrify.web.carrifyweb.response;
+package com.carrify.web.carrifyweb.exception;
 
-public class ApiResponseConstants {
+public class ApiErrorConstants {
 
     //VALIDATION ERRORS HAS TO START WITH 9**_CODE;
 
@@ -22,8 +22,8 @@ public class ApiResponseConstants {
     public static final String CARRIFY908_MESSAGE = "Invalid action parameter.";
 
 
-
-
+    public static final String CARRIFY_INTERNAL_CODE = "CARRIFY_INTERNAL_SERVER_ERROR";
+    public static final String CARRIFY_INTERNAL_MSG = "Internal Server Error";
 
     public static final String CARRIFY001_CODE = "CARRIFY-001";
     public static final String CARRIFY001_MSG = "Cars not found.";
@@ -36,7 +36,7 @@ public class ApiResponseConstants {
     public static final String CARRIFY005_CODE = "CARRIFY-005";
     public static final String CARRIFY005_MSG = "Email address already in use.";
     public static final String CARRIFY006_CODE = "CARRIFY-006";
-    public static final String CARRIFY006_MSG = "Phone number already in use.";
+    public static final String CARRIFY006_MSG = "Authentication failed.";
     public static final String CARRIFY007_CODE = "CARRIFY-007";
     public static final String CARRIFY007_MSG = "Personal number already in use.";
     public static final String CARRIFY008_CODE = "CARRIFY-008";

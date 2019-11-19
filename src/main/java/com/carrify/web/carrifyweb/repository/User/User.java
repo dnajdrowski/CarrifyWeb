@@ -1,6 +1,5 @@
 package com.carrify.web.carrifyweb.repository.User;
 
-import com.carrify.web.carrifyweb.repository.CarLocationLog.CarLocationLog;
 import com.carrify.web.carrifyweb.repository.Card.Card;
 import com.carrify.web.carrifyweb.repository.Role.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -23,7 +22,7 @@ public class User {
     @Column(name = "id", updatable = false, nullable = false, unique = true)
     private Integer userId;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username")
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -38,7 +37,7 @@ public class User {
     @Column(name = "longitude")
     private Double longitude;
 
-    @Column(name = "Email", nullable = false, unique = true, length = 64)
+    @Column(name = "email", nullable = false, unique = true, length = 64)
     private String email;
 
     @Column(name = "phone", length = 9, unique = true)

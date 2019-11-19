@@ -1,6 +1,5 @@
 package com.carrify.web.carrifyweb.request;
 
-import com.carrify.web.carrifyweb.repository.Car.Car;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -9,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-import static com.carrify.web.carrifyweb.response.ApiResponseConstants.*;
+import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
 
 @Getter
 @Setter
@@ -17,10 +16,6 @@ public class AuthRequest {
 
     @NotEmpty(message = CARRIFY901_CODE)
     private String action;
-
-    @NotEmpty(message = CARRIFY902_CODE)
-    @Length(min = 6, message = CARRIFY903_CODE)
-    private String username;
 
     @NotBlank(message = CARRIFY904_CODE)
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!=])(?=\\S+$).{8,}$",

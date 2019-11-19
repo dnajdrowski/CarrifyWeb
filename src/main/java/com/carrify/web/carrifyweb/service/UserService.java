@@ -3,7 +3,7 @@ package com.carrify.web.carrifyweb.service;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.repository.User.User;
 import com.carrify.web.carrifyweb.repository.User.UserRepository;
-import com.carrify.web.carrifyweb.response.ApiResponseConstants;
+import com.carrify.web.carrifyweb.exception.ApiErrorConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +18,6 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
-
-    public boolean existsUserWithUsername(String username) {
-        return userRepository.existsByUsername(username);
     }
 
     public boolean existsUserWithEmail(String email) {
@@ -42,7 +38,7 @@ public class UserService {
 
     public User saveUserToken(Integer userId, String token) {
         User user = userRepository.findById(userId).orElseThrow(() ->
-                new ApiNotFoundException(ApiResponseConstants.CARRIFY009_MSG, ApiResponseConstants.CARRIFY009_CODE));
+                new ApiNotFoundException(ApiErrorConstants.CARRIFY009_MSG, ApiErrorConstants.CARRIFY009_CODE));
 
         user.setToken(token);
         return userRepository.save(user);

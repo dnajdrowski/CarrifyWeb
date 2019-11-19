@@ -1,20 +1,19 @@
 package com.carrify.web.carrifyweb.controller;
 
 import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
-import com.carrify.web.carrifyweb.exception.ApiException;
+import com.carrify.web.carrifyweb.exception.ApiErrorConstants;
+import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiUnauthorizedException;
 import com.carrify.web.carrifyweb.repository.Role.Role;
 import com.carrify.web.carrifyweb.repository.User.User;
 import com.carrify.web.carrifyweb.request.AuthRequest;
 import com.carrify.web.carrifyweb.request.JwtVerifyTokenRequest;
-import com.carrify.web.carrifyweb.response.ApiResponseConstants;
 import com.carrify.web.carrifyweb.response.AuthResponse;
 import com.carrify.web.carrifyweb.response.JwtAuthenticationResponse;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;
 import com.carrify.web.carrifyweb.service.RoleService;
 import com.carrify.web.carrifyweb.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,10 +28,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-
 import java.util.Optional;
 
-import static com.carrify.web.carrifyweb.response.ApiResponseConstants.*;
+import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
 
 @Slf4j
 @Controller
@@ -71,14 +69,14 @@ public class AuthController {
     @PostMapping("/verifyToken")
     public ResponseEntity verifyToken(@Valid @RequestBody JwtVerifyTokenRequest verifyRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            throw new ApiBadRequestException(ApiResponseConstants.CARRIFY003_MSG, ApiResponseConstants.CARRIFY003_CODE);
+            throw new ApiBadRequestException(ApiErrorConstants.CARRIFY003_MSG, ApiErrorConstants.CARRIFY003_CODE);
         }
         String token = verifyRequest.getAccessToken();
         if (token != null && jwtTokenProvider.validateToken(token)) {
             Integer userId = jwtTokenProvider.getUserIdFromJWT(token);
             return ResponseEntity.ok(userId);
         } else {
-            throw new ApiUnauthorizedException(CARRIFY002_MSG,CARRIFY002_CODE);
+            throw new ApiUnauthorizedException(CARRIFY002_MSG, CARRIFY002_CODE);
         }
     }
 
@@ -142,25 +140,21 @@ public class AuthController {
                         case CARRIFY907_CODE:
                             throw new ApiBadRequestException(CARRIFY907_MESSAGE, CARRIFY907_CODE);
                         default:
-                            throw new ApiBadRequestException(null, null);
+                            throw new ApiBadRequestException("", "");
                     }
                 }
             }
         }
 
-        if (userService.existsUserWithUsername(request.getUsername())) {
-            throw new ApiBadRequestException(ApiResponseConstants.CARRIFY004_MSG, ApiResponseConstants.CARRIFY004_CODE);
-        }
-
         if (userService.existsUserWithEmail(request.getEmail())) {
-            throw new ApiBadRequestException(ApiResponseConstants.CARRIFY005_MSG, ApiResponseConstants.CARRIFY005_CODE);
+            throw new ApiBadRequestException(ApiErrorConstants.CARRIFY005_MSG, ApiErrorConstants.CARRIFY005_CODE);
         }
 
         if (userService.existsUserWithPersonalNumber(request.getPersonalNumber())) {
-            throw new ApiBadRequestException(ApiResponseConstants.CARRIFY007_MSG, ApiResponseConstants.CARRIFY007_CODE);
+            throw new ApiBadRequestException(ApiErrorConstants.CARRIFY007_MSG, ApiErrorConstants.CARRIFY007_CODE);
         }
 
-        User user = new User(request.getUsername(), request.getPassword(),
+        User user = new User(request.getPhone(), request.getPassword(),
                 request.getPersonalNumber(), request.getEmail(), request.getPhone());
 
         String password = passwordEncoder.encode(user.getPassword());
@@ -173,7 +167,7 @@ public class AuthController {
         if(savedUser != null) {
             return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
         }
     }
 }

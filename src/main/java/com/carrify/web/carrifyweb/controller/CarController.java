@@ -2,7 +2,7 @@ package com.carrify.web.carrifyweb.controller;
 
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.repository.Car.CarDTO;
-import com.carrify.web.carrifyweb.response.ApiResponseConstants;
+import com.carrify.web.carrifyweb.exception.ApiErrorConstants;
 import com.carrify.web.carrifyweb.service.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +29,7 @@ public class CarController {
         if(!cars.isEmpty()) {
             return ResponseEntity.ok(cars);
         } else {
-            throw new ApiNotFoundException(ApiResponseConstants.CARRIFY001_MSG, ApiResponseConstants.CARRIFY001_CODE);
+            throw new ApiNotFoundException(ApiErrorConstants.CARRIFY001_MSG, ApiErrorConstants.CARRIFY001_CODE);
         }
     }
 }
