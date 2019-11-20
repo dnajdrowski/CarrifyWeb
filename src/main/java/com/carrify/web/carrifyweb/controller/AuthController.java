@@ -75,7 +75,8 @@ public class AuthController {
             @ApiResponse(code = 500, message = "Errors:\ncode: " + CARRIFY_INTERNAL_CODE + "\n" + "msg: " + CARRIFY_INTERNAL_MSG,
                     response = ApiErrorResponse.class)
     })
-    @PostMapping({"", "/"})
+
+    @PostMapping()
     public ResponseEntity auth(@Valid @RequestBody AuthRequest request, BindingResult results) {
         switch (request.getAction()) {
             case "H421sCa":
@@ -146,7 +147,7 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtTokenProvider.generateToken(authentication);
         AuthResponse authResponse = new AuthResponse();
-        authResponse.setAction("a7Cg8xc"); //poprawne logowanie
+        authResponse.setAction("a7Cg8xc");
         authResponse.setToken(jwt);
         authResponse.setUserId(String.valueOf(jwtTokenProvider.getUserIdFromJWT(jwt)));
         return ResponseEntity.ok(authResponse);

@@ -39,7 +39,7 @@ public class CarController {
             @ApiResponse(code = 404, message = "Errors:\ncode: " + CARRIFY001_CODE + "\n" + "msg: " + CARRIFY001_MSG,
                     response = ApiErrorResponse.class)
     })
-    @GetMapping(value = {"", "/"})
+    @GetMapping()
     public ResponseEntity<List<CarDTO>> showAllCarsFleet() {
         List<CarDTO> cars = carService.getAllCars();
         if (!cars.isEmpty()) {
