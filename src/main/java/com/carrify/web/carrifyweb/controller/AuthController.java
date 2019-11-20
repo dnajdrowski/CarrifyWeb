@@ -66,7 +66,6 @@ public class AuthController {
             @ApiResponse(code = 400, message = "Errors:\ncode: " + CARRIFY005_CODE + "\n" + "msg: " + CARRIFY005_MSG + "\n\n"
                     + "code: " + CARRIFY007_CODE + "\n" + "msg: " + CARRIFY007_MSG + "\n"
                     + "code: " + CARRIFY901_CODE + "\n" + "msg: " + CARRIFY901_MSG + "\n"
-                    + "code: " + CARRIFY902_CODE + "\n" + "msg: " + CARRIFY902_MSG + "\n"
                     + "code: " + CARRIFY903_CODE + "\n" + "msg: " + CARRIFY903_MSG + "\n"
                     + "code: " + CARRIFY904_CODE + "\n" + "msg: " + CARRIFY904_MSG + "\n"
                     + "code: " + CARRIFY905_CODE + "\n" + "msg: " + CARRIFY905_MSG + "\n"
