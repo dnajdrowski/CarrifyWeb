@@ -134,7 +134,7 @@ public class AuthController {
     private ResponseEntity performLoginAction(AuthRequest request, BindingResult results) {
         if (results.hasErrors()) {
             for (ObjectError error : results.getAllErrors()) {
-                if (CARRIFY906_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
+                if (CARRIFY907_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
                     throw new ApiBadRequestException(CARRIFY907_MSG, CARRIFY907_CODE);
                 } else if (CARRIFY904_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
                     throw new ApiBadRequestException(CARRIFY904_MSG, CARRIFY904_CODE);
