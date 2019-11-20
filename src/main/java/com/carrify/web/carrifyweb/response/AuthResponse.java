@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class AuthResponse {
 
+    private String userId;
+    private String token;
     private String action;
     private String phoneNumber;
 

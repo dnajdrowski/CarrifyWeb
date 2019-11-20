@@ -16,7 +16,7 @@ import java.util.Collections;
 public class UserPrincipal implements UserDetails {
 
     private Integer id;
-    private String email;
+    private String phone;
 
     @JsonIgnore
     private String password;
@@ -25,7 +25,7 @@ public class UserPrincipal implements UserDetails {
 
     public static UserPrincipal create(User user) {
        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName());
-       return new UserPrincipal(user.getUserId(), user.getEmail(), user.getPassword(), authority);
+       return new UserPrincipal(user.getUserId(), user.getPhone(), user.getPassword(), authority);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email;
+        return this.phone;
     }
 
     @Override

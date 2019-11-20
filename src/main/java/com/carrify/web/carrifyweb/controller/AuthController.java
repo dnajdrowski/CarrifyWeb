@@ -10,7 +10,6 @@ import com.carrify.web.carrifyweb.request.AuthRequest;
 import com.carrify.web.carrifyweb.request.JwtVerifyTokenRequest;
 import com.carrify.web.carrifyweb.response.ApiErrorResponse;
 import com.carrify.web.carrifyweb.response.AuthResponse;
-import com.carrify.web.carrifyweb.response.JwtAuthenticationResponse;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;
 import com.carrify.web.carrifyweb.service.RoleService;
 import com.carrify.web.carrifyweb.service.UserService;
@@ -137,7 +136,7 @@ public class AuthController {
         if (results.hasErrors()) {
             for (ObjectError error : results.getAllErrors()) {
                 if (CARRIFY906_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
-                    throw new ApiBadRequestException(CARRIFY906_MSG, CARRIFY906_CODE);
+                    throw new ApiBadRequestException(CARRIFY907_MSG, CARRIFY907_CODE);
                 } else if (CARRIFY904_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
                     throw new ApiBadRequestException(CARRIFY904_MSG, CARRIFY904_CODE);
                 }
@@ -145,12 +144,15 @@ public class AuthController {
         }
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+                new UsernamePasswordAuthenticationToken(request.getPhone(), request.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtTokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt,
-                String.valueOf(jwtTokenProvider.getUserIdFromJWT(jwt))));
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setAction("a7Cg8xc"); //poprawne logowanie
+        authResponse.setToken(jwt);
+        authResponse.setUserId(String.valueOf(jwtTokenProvider.getUserIdFromJWT(jwt)));
+        return ResponseEntity.ok(authResponse);
     }
 
     private ResponseEntity performRegisterAction(AuthRequest request, BindingResult results) {
