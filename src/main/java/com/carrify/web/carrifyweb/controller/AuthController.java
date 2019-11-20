@@ -122,11 +122,9 @@ public class AuthController {
         AuthResponse authResponse = new AuthResponse();
         if (userService.existsUserWithPhoneNumber(request.getPhone())) {
             authResponse.setAction("Po23cVe");
-            authResponse.setPhoneNumber(request.getPhone());
             return ResponseEntity.ok(authResponse);
         } else {
             authResponse.setAction("WE3ceg6");
-            authResponse.setPhoneNumber(request.getPhone());
             return ResponseEntity.ok(authResponse);
         }
     }
