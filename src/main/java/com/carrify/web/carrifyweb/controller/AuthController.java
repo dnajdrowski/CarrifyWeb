@@ -8,11 +8,16 @@ import com.carrify.web.carrifyweb.repository.Role.Role;
 import com.carrify.web.carrifyweb.repository.User.User;
 import com.carrify.web.carrifyweb.request.AuthRequest;
 import com.carrify.web.carrifyweb.request.JwtVerifyTokenRequest;
+import com.carrify.web.carrifyweb.response.ApiErrorResponse;
 import com.carrify.web.carrifyweb.response.AuthResponse;
 import com.carrify.web.carrifyweb.response.JwtAuthenticationResponse;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;
 import com.carrify.web.carrifyweb.service.RoleService;
 import com.carrify.web.carrifyweb.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,20 +25,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Optional;
 
 import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @Slf4j
-@Controller
+@RestController
+@Api(tags = "Authorization")
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -52,6 +59,24 @@ public class AuthController {
         this.roleService = roleService;
     }
 
+
+    @ApiOperation(value = "Authenticate users", response = AuthResponse.class,
+            produces = APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Errors:\ncode: " + CARRIFY005_CODE + "\n" + "msg: " + CARRIFY005_MSG + "\n\n"
+                    + "code: " + CARRIFY007_CODE + "\n" + "msg: " + CARRIFY007_MSG + "\n"
+                    + "code: " + CARRIFY901_CODE + "\n" + "msg: " + CARRIFY901_MSG + "\n"
+                    + "code: " + CARRIFY902_CODE + "\n" + "msg: " + CARRIFY902_MSG + "\n"
+                    + "code: " + CARRIFY903_CODE + "\n" + "msg: " + CARRIFY903_MSG + "\n"
+                    + "code: " + CARRIFY904_CODE + "\n" + "msg: " + CARRIFY904_MSG + "\n"
+                    + "code: " + CARRIFY905_CODE + "\n" + "msg: " + CARRIFY905_MSG + "\n"
+                    + "code: " + CARRIFY906_CODE + "\n" + "msg: " + CARRIFY906_MSG + "\n"
+                    + "code: " + CARRIFY907_CODE + "\n" + "msg: " + CARRIFY907_MSG + "\n"
+                    + "code: " + CARRIFY908_CODE + "\n" + "msg: " + CARRIFY908_MSG, response = ApiErrorResponse.class),
+            @ApiResponse(code = 500, message = "Errors:\ncode: " + CARRIFY_INTERNAL_CODE + "\n" + "msg: " + CARRIFY_INTERNAL_MSG,
+                    response = ApiErrorResponse.class)
+    })
     @PostMapping({"", "/"})
     public ResponseEntity auth(@Valid @RequestBody AuthRequest request, BindingResult results) {
         switch (request.getAction()) {
@@ -62,10 +87,18 @@ public class AuthController {
             case "WE3ceg6":
                 return performRegisterAction(request, results);
             default:
-                throw new ApiBadRequestException(CARRIFY908_MESSAGE, CARRIFY908_CODE);
+                throw new ApiBadRequestException(CARRIFY908_MSG, CARRIFY908_CODE);
         }
     }
 
+    @ApiOperation(value = "Verify authorization token", response = Integer.class, produces = APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 401, message = "Errors:\ncode: " + CARRIFY002_CODE + "\n" + "msg: " + CARRIFY002_MSG,
+                    response = ApiErrorResponse.class),
+            @ApiResponse(code = 400, message = "Errors:\ncode: " + CARRIFY003_CODE + "\n" + "msg: " + CARRIFY003_MSG,
+                    response = ApiErrorResponse.class)
+    })
     @PostMapping("/verifyToken")
     public ResponseEntity verifyToken(@Valid @RequestBody JwtVerifyTokenRequest verifyRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -84,7 +117,7 @@ public class AuthController {
         if (results.hasErrors()) {
             for (ObjectError error : results.getAllErrors()) {
                 if (CARRIFY907_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
-                    throw new ApiBadRequestException(CARRIFY907_MESSAGE, CARRIFY907_CODE);
+                    throw new ApiBadRequestException(CARRIFY907_MSG, CARRIFY907_CODE);
                 }
             }
         }
@@ -104,9 +137,9 @@ public class AuthController {
         if (results.hasErrors()) {
             for (ObjectError error : results.getAllErrors()) {
                 if (CARRIFY906_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
-                    throw new ApiBadRequestException(CARRIFY906_MESSAGE, CARRIFY906_CODE);
+                    throw new ApiBadRequestException(CARRIFY906_MSG, CARRIFY906_CODE);
                 } else if (CARRIFY904_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
-                    throw new ApiBadRequestException(CARRIFY904_MESSAGE, CARRIFY904_CODE);
+                    throw new ApiBadRequestException(CARRIFY904_MSG, CARRIFY904_CODE);
                 }
             }
         }
@@ -126,19 +159,19 @@ public class AuthController {
                 if (error.getDefaultMessage() != null) {
                     switch (error.getDefaultMessage()) {
                         case CARRIFY901_CODE:
-                            throw new ApiBadRequestException(CARRIFY901_MESSAGE, CARRIFY901_CODE);
+                            throw new ApiBadRequestException(CARRIFY901_MSG, CARRIFY901_CODE);
                         case CARRIFY902_CODE:
-                            throw new ApiBadRequestException(CARRIFY902_MESSAGE, CARRIFY902_CODE);
+                            throw new ApiBadRequestException(CARRIFY902_MSG, CARRIFY902_CODE);
                         case CARRIFY903_CODE:
-                            throw new ApiBadRequestException(CARRIFY903_MESSAGE, CARRIFY903_CODE);
+                            throw new ApiBadRequestException(CARRIFY903_MSG, CARRIFY903_CODE);
                         case CARRIFY904_CODE:
-                            throw new ApiBadRequestException(CARRIFY904_MESSAGE, CARRIFY904_CODE);
+                            throw new ApiBadRequestException(CARRIFY904_MSG, CARRIFY904_CODE);
                         case CARRIFY905_CODE:
-                            throw new ApiBadRequestException(CARRIFY905_MESSAGE, CARRIFY905_CODE);
+                            throw new ApiBadRequestException(CARRIFY905_MSG, CARRIFY905_CODE);
                         case CARRIFY906_CODE:
-                            throw new ApiBadRequestException(CARRIFY906_MESSAGE, CARRIFY906_CODE);
+                            throw new ApiBadRequestException(CARRIFY906_MSG, CARRIFY906_CODE);
                         case CARRIFY907_CODE:
-                            throw new ApiBadRequestException(CARRIFY907_MESSAGE, CARRIFY907_CODE);
+                            throw new ApiBadRequestException(CARRIFY907_MSG, CARRIFY907_CODE);
                         default:
                             throw new ApiBadRequestException("", "");
                     }
@@ -164,8 +197,8 @@ public class AuthController {
         role.ifPresent(user::setRole);
 
         User savedUser = userService.saveUser(user);
-        if(savedUser != null) {
-            return ResponseEntity.ok().build();
+        if (savedUser != null) {
+            return ResponseEntity.ok(new AuthResponse());
         } else {
             throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
         }

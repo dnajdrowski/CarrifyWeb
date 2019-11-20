@@ -5,21 +5,21 @@ public class ApiErrorConstants {
     //VALIDATION ERRORS HAS TO START WITH 9**_CODE;
 
     public static final String CARRIFY901_CODE = "CARRIFY-901";
-    public static final String CARRIFY901_MESSAGE = "Action can't be empty.";
+    public static final String CARRIFY901_MSG = "Action can't be empty.";
     public static final String CARRIFY902_CODE = "CARRIFY-902";
-    public static final String CARRIFY902_MESSAGE = "Username can't be empty.";
+    public static final String CARRIFY902_MSG = "Username can't be empty.";
     public static final String CARRIFY903_CODE = "CARRIFY-903";
-    public static final String CARRIFY903_MESSAGE = "Username must have min 6 length.";
+    public static final String CARRIFY903_MSG = "Username must have min 6 length.";
     public static final String CARRIFY904_CODE = "CARRIFY-904";
-    public static final String CARRIFY904_MESSAGE = "Password must have min 8 length, special sign, digits and capital letter.";
+    public static final String CARRIFY904_MSG = "Password must have min 8 length, special sign, digits and capital letter.";
     public static final String CARRIFY905_CODE = "CARRIFY-905";
-    public static final String CARRIFY905_MESSAGE = "Personal number must have 11 digits.";
+    public static final String CARRIFY905_MSG = "Personal number must have 11 digits.";
     public static final String CARRIFY906_CODE = "CARRIFY-906";
-    public static final String CARRIFY906_MESSAGE = "Email must be valid.";
+    public static final String CARRIFY906_MSG = "Email must be valid.";
     public static final String CARRIFY907_CODE = "CARRIFY-907";
-    public static final String CARRIFY907_MESSAGE = "Phone number must have 9 digits.";
+    public static final String CARRIFY907_MSG = "Phone number must have 9 digits.";
     public static final String CARRIFY908_CODE = "CARRIFY-908";
-    public static final String CARRIFY908_MESSAGE = "Invalid action parameter.";
+    public static final String CARRIFY908_MSG = "Invalid action parameter.";
 
 
     public static final String CARRIFY_INTERNAL_CODE = "CARRIFY_INTERNAL_SERVER_ERROR";
