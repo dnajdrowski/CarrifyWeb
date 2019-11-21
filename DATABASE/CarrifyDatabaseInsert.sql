@@ -6,11 +6,11 @@ VALUES
 ('ADMIN');
 
 INSERT INTO
- `users` (`username`, `phone`, `password`, `personal_number`, `email`, `latitude`, `longitude`, `role_id`)
+ `users` (`username`, `phone`, `password`, `personal_number`, `email`, `latitude`, `longitude`, `role_id`, `token`)
 VALUES
-('user1', '656454343', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '98091008874', 'jankowal@gmail.com', null, null, 1),
-('user2', '934323423', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi','97101034345', 'dnajdrowski@gmail.com', null, null, 2),
-('user3', '734343312', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '99092049584','kserocki@gmail.com', null, null, 3);
+('user1', '656454343', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '98091008874', 'jankowal@gmail.com', null, null, 1, null),
+('user2', '934323423', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi','97101034345', 'dnajdrowski@gmail.com', null, null, 2, null),
+('user3', '734343312', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '99092049584','kserocki@gmail.com', null, null, 3, null);
 
 INSERT INTO
 `card` (`card_number`, `expire_year`, `expire_month`, `card_cvv`, `user_id`)
@@ -36,6 +36,37 @@ VALUES
 (3, 54.383533, 18.608790, '2019-10-12 13:13:00'),
 (4, 54.383636, 18.591707, '2019-10-12 20:00:10'),
 (5, 54.425521, 18.593068, '2019-10-09 16:54:32');
+
+INSERT INTO
+ `region_zone` (`stroke_width`, `stroke_color`, `zone_color`, `created_at`)
+ VALUES
+ (2, '#70834E0F', '#24F7941E','2019-11-21 21:00:00');
+
+INSERT INTO
+ `region_zone_coords` (`latitude`, `longitude`, `region_zone_id`, `created_at`)
+VALUES
+(54.42339,18.59511, 1, '2019-11-21 21:00:00'),
+(54.41395,18.5666, 1, '2019-11-21 21:00:00'),
+(54.40774,18.54904, 1, '2019-11-21 21:00:00'),
+(54.40554,18.55024, 1, '2019-11-21 21:00:00'),
+(54.40544,18.55917, 1, '2019-11-21 21:00:00'),
+(54.38096,18.58028, 1, '2019-11-21 21:00:00'),
+(54.37669,18.55782, 1, '2019-11-21 21:00:00'),
+(54.37076,18.56192, 1, '2019-11-21 21:00:00'),
+(54.35336,18.5602, 1, '2019-11-21 21:00:00'),
+(54.35465,18.51912, 1, '2019-11-21 21:00:00'),
+(54.30741,18.55745, 1, '2019-11-21 21:00:00'),
+(54.29309,18.59282, 1, '2019-11-21 21:00:00'),
+(54.3026,18.59865, 1, '2019-11-21 21:00:00'),
+(54.31602,18.60586, 1, '2019-11-21 21:00:00'),
+(54.32942,18.6314, 1, '2019-11-21 21:00:00'),
+(54.34105,18.64483, 1, '2019-11-21 21:00:00'),
+(54.33915,18.65473, 1, '2019-11-21 21:00:00'),
+(54.34055,18.66423, 1, '2019-11-21 21:00:00'),
+(54.34685,18.67264, 1, '2019-11-21 21:00:00'),
+(54.34785,18.69049, 1, '2019-11-21 21:00:00'),
+(54.35265,18.68998, 1, '2019-11-21 21:00:00'),
+(54.40045,18.67798, 1, '2019-11-21 21:00:00');
 
 
 

@@ -41,10 +41,11 @@ public class Car {
 
     @Column(name = "last_service")
     private LocalDateTime lastService;
+
     @Column(name = "car_state", nullable = false)
     private Integer carState;
 
-    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<CarLocationLog> carLocationLogs = new ArrayList<>();

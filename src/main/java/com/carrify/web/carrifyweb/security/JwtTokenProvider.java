@@ -70,7 +70,8 @@ public class JwtTokenProvider {
             if(isVerifyToken) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.HOUR_OF_DAY, 5);
-                if(Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody().getExpiration().before(calendar.getTime())) {
+                if(Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken)
+                        .getBody().getExpiration().before(calendar.getTime())) {
                     return false;
                 }
             }

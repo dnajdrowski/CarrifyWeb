@@ -127,9 +127,7 @@ CREATE TABLE `region_zone` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `stroke_width` int NOT NULL,
   `stroke_color` varchar(255) NOT NULL,
-  `stroke_alpha` int NOT NULL,
   `zone_color` varchar(255) NOT NULL,
-  `zone_alpha` int NOT NULL,
   `created_at` datetime NOT NULL
 );
 

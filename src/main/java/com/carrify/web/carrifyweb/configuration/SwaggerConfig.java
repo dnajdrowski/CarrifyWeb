@@ -27,7 +27,8 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false)
                 .tags(
                         new Tag("Cars", "All about cars"),
-                        new Tag("Authorization", "All about authorization")
+                        new Tag("Authorization", "All about authorization"),
+                        new Tag("Region zone", "Region zone details")
                 )
                 .apiInfo(apiInfo());
     }
