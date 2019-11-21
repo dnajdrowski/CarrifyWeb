@@ -28,7 +28,7 @@ public class SwaggerConfig {
                 .tags(
                         new Tag("Cars", "All about cars"),
                         new Tag("Authorization", "All about authorization"),
-                        new Tag("Region zone", "Region zone details")
+                        new Tag("Region Zone", "Region zone details")
                 )
                 .apiInfo(apiInfo());
     }

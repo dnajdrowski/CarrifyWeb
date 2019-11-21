@@ -30,7 +30,7 @@ public class RegionZoneController {
         this.regionZoneService = regionZoneService;
     }
 
-    @ApiOperation(value = "Get Region Zone details", response = RegionZone.class,
+    @ApiOperation(value = "Get region Zone details", response = RegionZone.class,
             produces = APPLICATION_JSON_VALUE)
     @GetMapping("/{id}")
     public ResponseEntity regionZoneDetails(@PathVariable("id") String regionZoneId) {
