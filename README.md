@@ -6,7 +6,7 @@
 
 **Contact:** ___carrifydevelopment@gmail.com___
 
-### WEB-APP-GOALS:
+### WEB-APP-AND-REST-API-GOALS:
 - management of clients registered in android application,
 - management of cars connected in android applications,
 - management of rentals that are covered by the android application,
@@ -33,7 +33,7 @@
 
 ## TECHNOLOGIES
 
-#### WEB-APP AND DATABASE:
+#### WEB-APP, REST API AND DATABASE:
 - MySQL
 - MariaDB
 - Java 11
@@ -44,6 +44,7 @@
 - JavaScript
 - jQuery
 - Semantic UI.
+- Swagger2
 
 #### ANDROID-APP
 - Java 11
@@ -66,6 +67,12 @@ Heroku Credentials:
 API is available on the
 ```
   https://carrify.herokuapp.com/api
+```
+
+API documentation available on the 
+
+```
+  https://carrify.herokuapp.com/swagger-ui.html
 ```
 When API is not used for a while, application stops and restarts after first request.
 
