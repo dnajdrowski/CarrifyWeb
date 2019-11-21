@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
 
 @Component
@@ -63,8 +65,15 @@ public class JwtTokenProvider {
         return Integer.parseInt((String) claims.get("userId"));
     }
 
-    public boolean validateToken(String authToken) {
+    public boolean validateToken(String authToken, Boolean isVerifyToken) {
         try {
+            if(isVerifyToken) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.HOUR_OF_DAY, 5);
+                if(Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody().getExpiration().before(calendar.getTime())) {
+                    return false;
+                }
+            }
             return userService.checkIfTokenMatchesToUser(authToken,
                     Integer.parseInt((String) Jwts.parser()
                             .setSigningKey(jwtSecret)
@@ -75,5 +84,4 @@ public class JwtTokenProvider {
             return false;
         }
     }
-
 }

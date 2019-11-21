@@ -78,6 +78,9 @@ public class AuthController {
 
     @PostMapping()
     public ResponseEntity auth(@Valid @RequestBody AuthRequest request, BindingResult results) {
+        if(request.getAction() == null ){
+            request.setAction("");
+        }
         switch (request.getAction()) {
             case "H421sCa":
                 return performPhoneNumberVerificationAction(request, results);
@@ -104,7 +107,7 @@ public class AuthController {
             throw new ApiBadRequestException(ApiErrorConstants.CARRIFY003_MSG, ApiErrorConstants.CARRIFY003_CODE);
         }
         String token = verifyRequest.getAccessToken();
-        if (token != null && jwtTokenProvider.validateToken(token)) {
+        if (token != null && jwtTokenProvider.validateToken(token, true)) {
             Integer userId = jwtTokenProvider.getUserIdFromJWT(token);
             return ResponseEntity.ok(userId);
         } else {
