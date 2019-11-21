@@ -62,7 +62,9 @@ public class AuthController {
     @ApiOperation(value = "Authenticate users", response = AuthResponse.class,
             produces = APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 200, message = "OK\nResponses:\n action: H421sCa - check if phone number exists in db\n"
+                    + "action: Po23cVe - login perform action\naction: WE3ceg6 - register perform action\n"
+                    + "action: a7Cg8xc - successfully login response"),
             @ApiResponse(code = 400, message = "Errors:\ncode: " + CARRIFY005_CODE + "\n" + "msg: " + CARRIFY005_MSG + "\n\n"
                     + "code: " + CARRIFY007_CODE + "\n" + "msg: " + CARRIFY007_MSG + "\n"
                     + "code: " + CARRIFY901_CODE + "\n" + "msg: " + CARRIFY901_MSG + "\n"

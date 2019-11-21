@@ -27,6 +27,9 @@ public class RegionZone {
     @Column(name = "stroke_color", nullable = false)
     private String strokeColor;
 
+    @Column(name = "zone_color", nullable = false)
+    private String zoneColor;
+
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 

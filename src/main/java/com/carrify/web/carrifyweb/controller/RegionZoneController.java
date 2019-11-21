@@ -21,7 +21,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @Slf4j
 @Controller
 @Api(tags = "Region Zone")
-@RequestMapping("/region-zones")
+@RequestMapping("api/region-zones")
 public class RegionZoneController {
 
     private final RegionZoneService regionZoneService;
