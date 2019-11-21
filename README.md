@@ -92,3 +92,6 @@ In this case first request may take longer to process.
 #### DATABASE DIAGRAM:
 ![DATABASE DIAGRAM](https://github.com/dnajdrowski/CarrifyWeb/blob/master/DATABASE/CarrifyDatabase.png)
 
+## WORK AND PROGRESS PLAN:
+![WORK_PROGRESS](https://github.com/dnajdrowski/CarrifyWeb/blob/master/DATABASE/workPlanAndProgress.png)
+
