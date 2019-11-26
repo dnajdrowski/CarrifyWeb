@@ -60,14 +60,8 @@ public class ReservationController {
                     car.setId(reservationRequest.getCarId());
                     User user = new User();
                     user.setUserId(reservationRequest.getUserId());
-                    Reservation reservation = Reservation.builder()
-                            .car(car)
-                            .user(user)
-                            .canExtend(1)
-                            .createdAt(LocalDateTime.now())
-                            .finishedAt(LocalDateTime.now().plusMinutes(15))
-                            .state(1)
-                            .build();
+                    Reservation reservation = new Reservation(1, 1, LocalDateTime.now(),
+                            LocalDateTime.now().plusMinutes(15), car, user);
                     reservationService.addNewReservation(reservation);
                     return ResponseEntity.ok().build();
                 } else {

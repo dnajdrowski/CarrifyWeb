@@ -75,7 +75,8 @@ public class AuthController {
                     + "code: " + CARRIFY907_CODE + "\n" + "msg: " + CARRIFY907_MSG + "\n"
                     + "code: " + CARRIFY908_CODE + "\n" + "msg: " + CARRIFY908_MSG, response = ApiErrorResponse.class),
             @ApiResponse(code = 500, message = "Errors:\ncode: " + CARRIFY_INTERNAL_CODE + "\n" + "msg: " + CARRIFY_INTERNAL_MSG,
-                    response = ApiErrorResponse.class)
+                    response = ApiErrorResponse.class),
+            @ApiResponse(code = 401, message = "Errors:\ncode: " + CARRIFY010_CODE + "\n" + "msg: " + CARRIFY010_MSG)
     })
 
     @PostMapping()
@@ -146,10 +147,15 @@ public class AuthController {
             }
         }
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getPhone(), request.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getPhone(), request.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (Exception e){
+            throw new ApiUnauthorizedException(CARRIFY010_MSG, CARRIFY010_CODE);
+        }
+        
         String jwt = jwtTokenProvider.generateToken(authentication);
         AuthResponse authResponse = new AuthResponse();
         authResponse.setAction("a7Cg8xc");

@@ -25,7 +25,6 @@ public class RegionZoneCoords {
     @Column(name = "longitude",nullable = false)
     private Double longitude;
 
-
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 

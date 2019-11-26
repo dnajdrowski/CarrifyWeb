@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            log.debug("Authentication failed.");
+            log.debug(e.getLocalizedMessage());
         }
 
         filterChain.doFilter(request, response);

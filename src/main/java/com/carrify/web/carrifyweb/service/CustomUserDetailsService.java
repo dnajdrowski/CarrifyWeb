@@ -1,5 +1,8 @@
 package com.carrify.web.carrifyweb.service;
 
+import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
+import com.carrify.web.carrifyweb.exception.ApiErrorConstants;
+import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.repository.User.User;
 import com.carrify.web.carrifyweb.security.UserPrincipal;
 import com.carrify.web.carrifyweb.repository.User.UserRepository;
@@ -21,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserById(Integer id) {
         User user = userRepository.findById(id).orElseThrow(() ->
-                new UsernameNotFoundException("User not found with id: " + id));
+                new ApiNotFoundException(ApiErrorConstants.CARRIFY009_MSG, ApiErrorConstants.CARRIFY009_CODE));
 
         return UserPrincipal.create(user);
     }
@@ -29,7 +32,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
         User user = userRepository.findByPhone(phone)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with phone " + phone));
+                .orElseThrow(() ->
+                        new ApiNotFoundException(ApiErrorConstants.CARRIFY009_MSG, ApiErrorConstants.CARRIFY009_CODE));
         return UserPrincipal.create(user);
     }
 
