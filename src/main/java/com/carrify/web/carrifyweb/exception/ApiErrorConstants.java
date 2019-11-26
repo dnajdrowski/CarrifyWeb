@@ -40,7 +40,7 @@ public class ApiErrorConstants {
     public static final String CARRIFY007_CODE = "CARRIFY-007";
     public static final String CARRIFY007_MSG = "Personal number already in use.";
     public static final String CARRIFY008_CODE = "CARRIFY-008";
-    public static final String CARRIFY008_MSG = "Token does't match to the user.";
+    public static final String CARRIFY008_MSG = "Reservations not found.";
     public static final String CARRIFY009_CODE = "CARRIFY-009";
     public static final String CARRIFY009_MSG = "User not found.";
 }

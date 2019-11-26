@@ -2,13 +2,11 @@ package com.carrify.web.carrifyweb.repository.CarLocationLog;
 
 import com.carrify.web.carrifyweb.repository.Car.Car;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,16 +16,16 @@ public class CarLocationLog  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, updatable = false, nullable = false)
-    private Integer name;
+    private Integer id;
 
     @Column(name = "latitude", nullable = false)
-    private Long latitude;
+    private Double latitude;
 
     @Column(name = "longitude", nullable = false)
-    private Long longitude;
+    private Double longitude;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id")

@@ -1,6 +1,7 @@
 package com.carrify.web.carrifyweb.repository.Car;
 
 import com.carrify.web.carrifyweb.repository.CarLocationLog.CarLocationLog;
+import com.carrify.web.carrifyweb.repository.Reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -27,9 +28,6 @@ public class Car {
     @Column(name = "fuel_level", nullable = false)
     private Integer fuelLevel;
 
-    @Column(name = "last_sync")
-    private LocalDateTime lastSync;
-
     @Column(name = "registration_number", nullable = false, unique = true)
     private String registrationNumber;
 
@@ -49,5 +47,13 @@ public class Car {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<CarLocationLog> carLocationLogs = new ArrayList<>();
+
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonManagedReference
+    private List<Reservation> reservations = new ArrayList<>();
+
+    @Transient
+    private CarLocationLog lastLocation;
 
 }

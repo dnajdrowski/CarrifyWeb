@@ -28,8 +28,10 @@ public class UserService {
         return userRepository.existsByPhone(phone);
     }
 
-    public boolean existsUserWithPersonalNumber(String personalNumber) {
-        return userRepository.existsByPersonalNumber(personalNumber);
+    public boolean existsUserWithPersonalNumber(String personalNumber) { return userRepository.existsByPersonalNumber(personalNumber);}
+
+    public boolean existsUserWithUserId(Integer userId) {
+        return userRepository.existsById(userId);
     }
 
     public User saveUser(User user) {

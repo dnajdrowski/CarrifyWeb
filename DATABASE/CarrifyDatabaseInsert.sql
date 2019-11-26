@@ -8,7 +8,7 @@ VALUES
 INSERT INTO
  `users` (`username`, `phone`, `password`, `personal_number`, `email`, `latitude`, `longitude`, `role_id`, `token`)
 VALUES
-('user1', '656454343', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '98091008874', 'jankowal@gmail.com', null, null, 1, null),
+('user1', '656454343', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '98091008874', 'jankowal@gmail.com', null, null, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NzQ3MTgxNzYsImV4cCI6MTU3NTMyMjk3NiwidXNlcklkIjoiMSJ9.mlfDxYqcrx65jS6Mi0ZQNA4f5IHJ28q-3vfwVFRh2LZGkWFTpalrovjR5HSmRx1Mwl8Lx4REhpxTF5RJInfvbQ'),
 ('user2', '934323423', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi','97101034345', 'dnajdrowski@gmail.com', null, null, 2, null),
 ('user3', '734343312', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '99092049584','kserocki@gmail.com', null, null, 3, null);
 
@@ -32,10 +32,20 @@ INSERT INTO
  `car_location_log` (`car_id`, `latitude`, `longitude`, `created_at`)
 VALUES
 (1, 54.303132, 18.589390, '2019-10-10 15:24:00'),
+(1, 54.310343, 18.579344, '2019-10-10 15:26:00'),
+(1, 54.320343, 18.569344, '2019-10-10 15:28:00'),
 (2, 54.396464, 18.571315, '2019-10-11 15:59:00'),
+(2, 54.406464, 18.581315, '2019-10-11 16:01:00'),
+(2, 54.416464, 18.591315, '2019-10-11 16:03:00'),
 (3, 54.383533, 18.608790, '2019-10-12 13:13:00'),
+(3, 54.393533, 18.618790, '2019-10-12 13:15:00'),
+(3, 54.403533, 18.628790, '2019-10-12 13:17:00'),
 (4, 54.383636, 18.591707, '2019-10-12 20:00:10'),
-(5, 54.425521, 18.593068, '2019-10-09 16:54:32');
+(4, 54.373636, 18.581707, '2019-10-12 20:00:10'),
+(4, 54.363636, 18.571707, '2019-10-12 20:00:10'),
+(5, 54.425521, 18.593068, '2019-10-09 16:54:32'),
+(5, 54.415521, 18.603068, '2019-10-09 16:56:32'),
+(5, 54.405521, 18.613068, '2019-10-09 16:58:32');
 
 INSERT INTO
  `region_zone` (`stroke_width`, `stroke_color`, `zone_color`, `created_at`)
@@ -67,6 +77,13 @@ VALUES
 (54.34785,18.69049, 1, '2019-11-21 21:00:00'),
 (54.35265,18.68998, 1, '2019-11-21 21:00:00'),
 (54.40045,18.67798, 1, '2019-11-21 21:00:00');
+
+INSERT INTO variables (`name`, `value`)
+VALUES ('reservation_time', '15'),
+    ('extra_reservation_time', '5');
+
+INSERT INTO `reservation` (`user_id`, `car_id`, `state`, `can_extend`, `created_at`, `finished_at`)
+VALUES (1, 1, 0, 1,'2019-11-21 21:00:00', '2019-11-21 21:15:00');
 
 
 

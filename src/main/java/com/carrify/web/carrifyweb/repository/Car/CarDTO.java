@@ -1,5 +1,5 @@
 package com.carrify.web.carrifyweb.repository.Car;
-
+import com.carrify.web.carrifyweb.repository.CarLocationLog.CarLocationLogDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,24 +13,22 @@ public class CarDTO {
     private Integer id;
     private String name;
     private Integer fuelLevel;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime lastSync;
     private String registrationNumber;
     private Integer serviceMode;
     private Integer mileage;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime lastService;
+    private String lastService;
     private Integer carState;
+    private CarLocationLogDTO lastLocation;
 
     public CarDTO(Car car) {
         this.id = car.getId();
         this.name = car.getName();
         this.fuelLevel = car.getFuelLevel();
-        this.lastSync = car.getLastSync();
         this.registrationNumber = car.getRegistrationNumber();
         this.serviceMode = car.getServiceMode();
+        this.lastLocation = new CarLocationLogDTO(car.getLastLocation());
         this.mileage = car.getMileage();
-        this.lastService = car.getLastService();
+        this.lastService = car.getLastService().toString();
         this.carState = car.getCarState();
     }
 }

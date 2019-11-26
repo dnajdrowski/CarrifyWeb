@@ -106,7 +106,8 @@ CREATE TABLE `reservation` (
   `car_id` int NOT NULL,
   `state` int NOT NULL,
   `can_extend` int NOT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` datetime NOT NULL,
+  `finished_at` datetime NOT NULL
 );
 
 CREATE TABLE `variables` (

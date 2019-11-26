@@ -1,6 +1,7 @@
 package com.carrify.web.carrifyweb.repository.User;
 
 import com.carrify.web.carrifyweb.repository.Card.Card;
+import com.carrify.web.carrifyweb.repository.Reservation.Reservation;
 import com.carrify.web.carrifyweb.repository.Role.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -54,6 +55,11 @@ public class User {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<Card> cards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonManagedReference
+    private List<Reservation> reservations = new ArrayList<>();
 
     public User(String username, String password, String personalNumber, String email, String phone) {
         this.username = username;
