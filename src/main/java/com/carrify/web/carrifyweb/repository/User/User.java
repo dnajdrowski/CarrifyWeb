@@ -21,7 +21,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false, unique = true)
-    private Integer userId;
+    private Integer id;
 
     @Column(name = "username")
     private String username;
@@ -61,12 +61,21 @@ public class User {
     @JsonManagedReference
     private List<Reservation> reservations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonManagedReference
+    private List<Reservation> rents = new ArrayList<>();
+
     public User(String username, String password, String personalNumber, String email, String phone) {
         this.username = username;
         this.password = password;
         this.personalNumber = personalNumber;
         this.email = email;
         this.phone = phone;
+    }
+
+    public User(Integer userId) {
+        this.id = userId;
     }
 }
 

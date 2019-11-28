@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
@@ -39,27 +38,18 @@ public class ReservationController {
 
     @GetMapping
     public ResponseEntity<List<ReservationDTO>> showAllReservations() {
-        List<ReservationDTO> reservations = reservationService.getAllReservations();
-        if (!reservations.isEmpty()) {
-            return ResponseEntity.ok(reservations);
-        } else {
-            throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
-        }
+        return ResponseEntity.ok(reservationService.getAllReservations());
     }
 
     @PostMapping("/new-reservation")
     public ResponseEntity addNewReservation(@Valid @RequestBody ReservationRequest reservationRequest, BindingResult bindingResult) {
-        System.out.println(reservationRequest.getCarId());
-        System.out.println(reservationRequest.getUserId());
         if (bindingResult.hasErrors()) {
             throw new ApiNotFoundException(CARRIFY001_MSG, CARRIFY001_CODE);
         } else {
             if (userService.existsUserWithUserId(reservationRequest.getUserId())) {
                 if (carService.existsCarWithCarId(reservationRequest.getCarId())) {
-                    Car car = new Car();
-                    car.setId(reservationRequest.getCarId());
-                    User user = new User();
-                    user.setUserId(reservationRequest.getUserId());
+                    Car car = new Car(reservationRequest.getCarId());
+                    User user = new User(reservationRequest.getUserId());
                     Reservation reservation = new Reservation(1, 1, LocalDateTime.now(),
                             LocalDateTime.now().plusMinutes(15), car, user);
                     reservationService.addNewReservation(reservation);

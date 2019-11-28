@@ -48,6 +48,6 @@ public class UserService {
 
     public boolean checkIfTokenMatchesToUser(String token, Integer userId) {
         Optional<User> user = userRepository.findByToken(token);
-        return user.filter(value -> userId.equals(value.getUserId())).isPresent();
+        return user.filter(value -> userId.equals(value.getId())).isPresent();
     }
 }

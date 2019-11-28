@@ -22,6 +22,6 @@ public class ReservationDTO {
         this.createdAt = reservation.getCreatedAt().toString();
         this.finishedAt = reservation.getFinishedAt().toString();
         this.carId = reservation.getCar().getId();
-        this.userId = reservation.getUser().getUserId();
+        this.userId = reservation.getUser().getId();
     }
 }

@@ -1,8 +1,6 @@
 package com.carrify.web.carrifyweb.controller;
 
-import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.repository.Car.CarDTO;
-import com.carrify.web.carrifyweb.exception.ApiErrorConstants;
 import com.carrify.web.carrifyweb.response.ApiErrorResponse;
 import com.carrify.web.carrifyweb.service.CarService;
 import io.swagger.annotations.Api;
@@ -41,11 +39,6 @@ public class CarController {
     })
     @GetMapping
     public ResponseEntity<List<CarDTO>> showAllCarsFleet() {
-        List<CarDTO> cars = carService.getAllCars();
-        if (!cars.isEmpty()) {
-            return ResponseEntity.ok(cars);
-        } else {
-            throw new ApiNotFoundException(CARRIFY001_MSG, CARRIFY001_CODE);
-        }
+        return ResponseEntity.ok(carService.getAllCars());
     }
 }

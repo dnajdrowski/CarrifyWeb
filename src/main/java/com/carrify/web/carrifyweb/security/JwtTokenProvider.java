@@ -45,7 +45,7 @@ public class JwtTokenProvider {
         String token = Jwts.builder()
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .claim("userId", Integer.toString(userPrincipal.getId()))
+                .claim("id", Integer.toString(userPrincipal.getId()))
                 .signWith(getSigningKey())
                 .compact();
 
@@ -62,7 +62,7 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Integer.parseInt((String) claims.get("userId"));
+        return Integer.parseInt((String) claims.get("id"));
     }
 
     public boolean validateToken(String authToken, Boolean isVerifyToken) {
@@ -80,7 +80,7 @@ public class JwtTokenProvider {
                             .setSigningKey(jwtSecret)
                             .parseClaimsJws(authToken)
                             .getBody()
-                            .get("userId")));
+                            .get("id")));
         } catch (Exception e) {
             return false;
         }

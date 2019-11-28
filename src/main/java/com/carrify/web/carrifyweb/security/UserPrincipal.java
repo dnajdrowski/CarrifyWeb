@@ -25,7 +25,7 @@ public class UserPrincipal implements UserDetails {
 
     public static UserPrincipal create(User user) {
        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName());
-       return new UserPrincipal(user.getUserId(), user.getPhone(), user.getPassword(), authority);
+       return new UserPrincipal(user.getId(), user.getPhone(), user.getPassword(), authority);
     }
 
     @Override

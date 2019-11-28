@@ -1,6 +1,7 @@
 package com.carrify.web.carrifyweb.repository.Car;
 
 import com.carrify.web.carrifyweb.repository.CarLocationLog.CarLocationLog;
+import com.carrify.web.carrifyweb.repository.Rent.Rent;
 import com.carrify.web.carrifyweb.repository.Reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -53,7 +54,15 @@ public class Car {
     @JsonManagedReference
     private List<Reservation> reservations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonManagedReference
+    private List<Rent> rents = new ArrayList<>();
+
     @Transient
     private CarLocationLog lastLocation;
 
+    public Car(Integer carId) {
+        this.id = carId;
+    }
 }

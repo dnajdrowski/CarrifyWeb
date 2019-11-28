@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.service;
 
+import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.repository.Car.Car;
 import com.carrify.web.carrifyweb.repository.Car.CarDTO;
 import com.carrify.web.carrifyweb.repository.Car.CarRepository;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
+import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.CARRIFY001_CODE;
+import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.CARRIFY001_MSG;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -30,12 +33,17 @@ public class CarService {
 
     public List<CarDTO> getAllCars() {
         Iterable<Car> cars = carRepository.findAll();
-        return StreamSupport.stream(cars.spliterator(), false)
+        List<CarDTO> collectedCars = StreamSupport.stream(cars.spliterator(), false)
                 .map(car -> {
                     Optional<CarLocationLog> lastCarLocation = carLocationLogRepository.findTopByCar_IdOrderByIdDesc(car.getId());
                     lastCarLocation.ifPresent(car::setLastLocation);
                     return new CarDTO(car);
                 })
                 .collect(toList());
+        if(collectedCars.isEmpty()) {
+            throw new ApiNotFoundException(CARRIFY001_MSG, CARRIFY001_CODE);
+        }
+
+        return collectedCars;
     }
 }

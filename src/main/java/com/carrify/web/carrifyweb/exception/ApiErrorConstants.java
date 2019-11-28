@@ -45,4 +45,18 @@ public class ApiErrorConstants {
     public static final String CARRIFY009_MSG = "User not found.";
     public static final String CARRIFY010_CODE = "CARRIFY-010";
     public static final String CARRIFY010_MSG = "Invalid password.";
+    public static final String CARRIFY011_CODE = "CARRIFY-011";
+    public static final String CARRIFY011_MSG = "Car location logs not found.";
+    public static final String CARRIFY012_CODE = "CARRIFY-012";
+    public static final String CARRIFY012_MSG = "Rentals not found.";
+    public static final String CARRIFY013_CODE = "CARRIFY-013";
+    public static final String CARRIFY013_MSG = "Car not found.";
+    public static final String CARRIFY014_CODE = "CARRIFY-014";
+    public static final String CARRIFY014_MSG = "Rental not found.";
+    public static final String CARRIFY015_CODE = "CARRIFY-015";
+    public static final String CARRIFY015_MSG = "Rental is already finished.";
+    public static final String CARRIFY016_CODE = "CARRIFY-016";
+    public static final String CARRIFY016_MSG = "User already has rental.";
+    public static final String CARRIFY017_CODE = "CARRIFY-017";
+    public static final String CARRIFY017_MSG = "Car is already rented.";
 }
