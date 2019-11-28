@@ -20,24 +20,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public boolean existsUserWithEmail(String email) {
-        return userRepository.existsByEmail(email);
-    }
-
-    public boolean existsUserWithPhoneNumber(String phone) {
-        return userRepository.existsByPhone(phone);
-    }
-
-    public boolean existsUserWithPersonalNumber(String personalNumber) { return userRepository.existsByPersonalNumber(personalNumber);}
-
-    public boolean existsUserWithUserId(Integer userId) {
-        return userRepository.existsById(userId);
-    }
-
-    public User saveUser(User user) {
-        return userRepository.save(user);
-    }
-
     public User saveUserToken(Integer userId, String token) {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ApiNotFoundException(ApiErrorConstants.CARRIFY009_MSG, ApiErrorConstants.CARRIFY009_CODE));

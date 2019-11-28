@@ -2,14 +2,16 @@ package com.carrify.web.carrifyweb.model.RegionZoneCoords;
 
 import com.carrify.web.carrifyweb.model.RegionZone.RegionZone;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "region_zone_coords")
 public class RegionZoneCoords {
 

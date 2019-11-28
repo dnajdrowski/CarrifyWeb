@@ -52,16 +52,19 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<Card> cards = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<Reservation> reservations = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference

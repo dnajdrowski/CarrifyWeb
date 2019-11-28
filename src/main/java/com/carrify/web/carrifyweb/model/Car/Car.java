@@ -15,9 +15,9 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "car")
-@NoArgsConstructor
 public class Car {
 
     @Id
@@ -46,17 +46,20 @@ public class Car {
     @Column(name = "car_state", nullable = false)
     private Integer carState;
 
-    @OneToMany(mappedBy = "Car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @Builder.Default
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<CarLocationLog> carLocationLogs = new ArrayList<>();
 
-    @OneToMany(mappedBy = "Car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @Builder.Default
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<Reservation> reservations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "Car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @Builder.Default
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
     private List<Rent> rents = new ArrayList<>();

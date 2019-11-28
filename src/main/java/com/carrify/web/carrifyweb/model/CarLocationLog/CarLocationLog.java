@@ -2,14 +2,16 @@ package com.carrify.web.carrifyweb.model.CarLocationLog;
 
 import com.carrify.web.carrifyweb.model.Car.Car;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class CarLocationLog  {
 

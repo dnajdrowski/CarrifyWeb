@@ -2,8 +2,7 @@ package com.carrify.web.carrifyweb.model.RegionZone;
 
 import com.carrify.web.carrifyweb.model.RegionZoneCoords.RegionZoneCoords;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +11,9 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "region_zone")
 public class RegionZone {
 
@@ -32,6 +34,7 @@ public class RegionZone {
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "regionZone", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<RegionZoneCoords> regionZoneCoords = new ArrayList<>();
