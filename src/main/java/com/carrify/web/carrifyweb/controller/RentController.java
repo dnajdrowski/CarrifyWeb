@@ -102,7 +102,7 @@ public class RentController {
         return ResponseEntity.ok(rentService.getUserActiveRent(userId));
     }
 
-    @ApiOperation(value = "Show user active rent", response = RentDTO.class, produces = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Add new rent", response = RentDTO.class, produces = APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "Errors:\ncode: " + CARRIFY013_CODE + "\n" + "msg: " + CARRIFY013_MSG + "\n"
