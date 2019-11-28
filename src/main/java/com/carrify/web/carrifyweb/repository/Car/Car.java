@@ -6,6 +6,7 @@ import com.carrify.web.carrifyweb.repository.Reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "car")
+@NoArgsConstructor
 public class Car {
 
     @Id
