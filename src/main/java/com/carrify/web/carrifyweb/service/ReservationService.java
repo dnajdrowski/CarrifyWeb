@@ -2,9 +2,9 @@ package com.carrify.web.carrifyweb.service;
 
 
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
-import com.carrify.web.carrifyweb.repository.Reservation.Reservation;
-import com.carrify.web.carrifyweb.repository.Reservation.ReservationDTO;
-import com.carrify.web.carrifyweb.repository.Reservation.ReservationRepository;
+import com.carrify.web.carrifyweb.model.Reservation.Reservation;
+import com.carrify.web.carrifyweb.model.Reservation.ReservationDTO;
+import com.carrify.web.carrifyweb.repository.ReservationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

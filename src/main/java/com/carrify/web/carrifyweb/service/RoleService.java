@@ -1,7 +1,7 @@
 package com.carrify.web.carrifyweb.service;
 
-import com.carrify.web.carrifyweb.repository.Role.Role;
-import com.carrify.web.carrifyweb.repository.Role.RoleRepository;
+import com.carrify.web.carrifyweb.model.Role.Role;
+import com.carrify.web.carrifyweb.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

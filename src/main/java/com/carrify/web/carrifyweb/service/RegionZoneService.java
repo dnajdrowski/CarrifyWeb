@@ -1,9 +1,9 @@
 package com.carrify.web.carrifyweb.service;
 
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
-import com.carrify.web.carrifyweb.repository.RegionZone.RegionZone;
-import com.carrify.web.carrifyweb.repository.RegionZone.RegionZoneDTO;
-import com.carrify.web.carrifyweb.repository.RegionZone.RegionZoneRepository;
+import com.carrify.web.carrifyweb.model.RegionZone.RegionZone;
+import com.carrify.web.carrifyweb.model.RegionZone.RegionZoneDTO;
+import com.carrify.web.carrifyweb.repository.RegionZoneRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

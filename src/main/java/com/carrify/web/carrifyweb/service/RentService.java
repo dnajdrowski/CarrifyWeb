@@ -3,11 +3,13 @@ package com.carrify.web.carrifyweb.service;
 import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
 import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
-import com.carrify.web.carrifyweb.repository.Car.Car;
-import com.carrify.web.carrifyweb.repository.Car.CarRepository;
-import com.carrify.web.carrifyweb.repository.Rent.Rent;
-import com.carrify.web.carrifyweb.repository.Rent.RentDTO;
-import com.carrify.web.carrifyweb.repository.Rent.RentRepository;
+import com.carrify.web.carrifyweb.model.Car.Car;
+import com.carrify.web.carrifyweb.repository.CarRepository;
+import com.carrify.web.carrifyweb.model.Rent.Rent;
+import com.carrify.web.carrifyweb.model.Rent.RentDTO;
+import com.carrify.web.carrifyweb.repository.RentRepository;
+import com.carrify.web.carrifyweb.model.User.User;
+import com.carrify.web.carrifyweb.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,10 +26,12 @@ public class RentService {
 
     private final RentRepository rentRepository;
     private final CarRepository carRepository;
+    private final UserRepository userRepository;
 
-    public RentService(RentRepository rentRepository, CarRepository carRepository) {
+    public RentService(RentRepository rentRepository, CarRepository carRepository, UserRepository userRepository) {
         this.rentRepository = rentRepository;
         this.carRepository = carRepository;
+        this.userRepository = userRepository;
     }
 
     public List<RentDTO> getAllRents() {
@@ -143,6 +147,14 @@ public class RentService {
     }
 
     public RentDTO startRent(Integer userId, Integer carId) {
+
+        if(carRepository.findById(carId).isEmpty()) {
+            throw new ApiNotFoundException(CARRIFY013_MSG, CARRIFY013_CODE);
+        }
+
+        if(userRepository.findById(userId).isEmpty()) {
+            throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
+        }
         if(rentRepository.findFirstByUser_IdAndEndAtIsNull(userId).isPresent()) {
             throw new ApiBadRequestException(CARRIFY016_MSG, CARRIFY016_CODE);
         }
@@ -151,8 +163,13 @@ public class RentService {
             throw new ApiBadRequestException(CARRIFY017_MSG, CARRIFY017_CODE);
         }
 
-        Rent rent = new Rent(LocalDateTime.now(), carId, userId);
-        rent.setDistance(0.0);
+        Rent rent = Rent.builder()
+                .distance(0.0)
+                .createdAt(LocalDateTime.now())
+                .car(Car.builder().id(carId).build())
+                .user(User.builder().id(userId).build())
+                .build();
+
         Rent savedRent = rentRepository.save(rent);
         if(savedRent == null) {
             throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);

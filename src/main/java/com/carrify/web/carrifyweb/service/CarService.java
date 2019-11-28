@@ -1,11 +1,11 @@
 package com.carrify.web.carrifyweb.service;
 
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
-import com.carrify.web.carrifyweb.repository.Car.Car;
-import com.carrify.web.carrifyweb.repository.Car.CarDTO;
-import com.carrify.web.carrifyweb.repository.Car.CarRepository;
-import com.carrify.web.carrifyweb.repository.CarLocationLog.CarLocationLog;
-import com.carrify.web.carrifyweb.repository.CarLocationLog.CarLocationLogRepository;
+import com.carrify.web.carrifyweb.model.Car.Car;
+import com.carrify.web.carrifyweb.model.Car.CarDTO;
+import com.carrify.web.carrifyweb.repository.CarRepository;
+import com.carrify.web.carrifyweb.model.CarLocationLog.CarLocationLog;
+import com.carrify.web.carrifyweb.repository.CarLocationLogRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,10 +25,6 @@ public class CarService {
     public CarService(CarRepository carRepository, CarLocationLogRepository carLocationLogRepository) {
         this.carRepository = carRepository;
         this.carLocationLogRepository = carLocationLogRepository;
-    }
-
-    public boolean existsCarWithCarId(Integer carId) {
-        return carRepository.existsById(carId);
     }
 
     public List<CarDTO> getAllCars() {

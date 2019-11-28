@@ -1,11 +1,10 @@
 package com.carrify.web.carrifyweb.service;
 
-import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
 import com.carrify.web.carrifyweb.exception.ApiErrorConstants;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
-import com.carrify.web.carrifyweb.repository.User.User;
+import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.security.UserPrincipal;
-import com.carrify.web.carrifyweb.repository.User.UserRepository;
+import com.carrify.web.carrifyweb.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

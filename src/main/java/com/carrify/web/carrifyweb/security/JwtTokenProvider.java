@@ -1,6 +1,6 @@
 package com.carrify.web.carrifyweb.security;
 
-import com.carrify.web.carrifyweb.repository.User.User;
+import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.service.UserService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
