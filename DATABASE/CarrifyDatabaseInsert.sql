@@ -79,8 +79,10 @@ VALUES
 (54.40045,18.67798, 1, '2019-11-21 21:00:00');
 
 INSERT INTO variables (`name`, `value`)
-VALUES ('reservation_time', '15'),
-    ('extra_reservation_time', '5');
+VALUES ('reservationTime', '15'),
+    ('extraReservationTime', '5'),
+    ('pricePerMinute', '80'),
+    ('pricePerKm', '70');
 
 INSERT INTO `reservation` (`user_id`, `car_id`, `state`, `can_extend`, `created_at`, `finished_at`)
 VALUES (1, 1, 0, 1,'2019-11-21 21:00:00', '2019-11-21 21:15:00');

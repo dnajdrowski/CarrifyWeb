@@ -8,7 +8,7 @@ import lombok.Setter;
 public class RentDTO {
 
     private Integer id;
-    private Double distance;
+    private Integer distance;
     private Integer amount;
     private String createdAt;
     private String endAt;

@@ -51,7 +51,7 @@ CREATE TABLE `rent` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `car_id` int NOT NULL,
-  `distance` double NOT NULL DEFAULT 0,
+  `distance` int NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL,
   `end_at` datetime,
   `amount` int

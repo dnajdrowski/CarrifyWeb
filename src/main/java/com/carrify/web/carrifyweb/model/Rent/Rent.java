@@ -22,7 +22,7 @@ public class Rent {
     private Integer id;
 
     @Column(name = "distance")
-    private Double distance;
+    private Integer distance;
 
     @Column(name = "amount")
     private Integer amount;
