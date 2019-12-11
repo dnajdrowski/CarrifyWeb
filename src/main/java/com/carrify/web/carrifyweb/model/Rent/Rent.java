@@ -33,7 +33,7 @@ public class Rent {
     @Column(name = "end_at", nullable = false)
     private LocalDateTime endAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "car_id")
     @JsonBackReference
     private Car car;

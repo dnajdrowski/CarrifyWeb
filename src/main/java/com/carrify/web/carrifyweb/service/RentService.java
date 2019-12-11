@@ -12,6 +12,7 @@ import com.carrify.web.carrifyweb.repository.RentRepository;
 import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.repository.UserRepository;
 import com.carrify.web.carrifyweb.repository.VariableRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,7 @@ import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
 import static java.util.stream.Collectors.toList;
 
 
+@Slf4j
 @Service
 public class RentService {
 
@@ -193,11 +195,15 @@ public class RentService {
     @Transactional
     public RentDTO startRent(Integer userId, Integer carId) {
 
-        if (carRepository.findById(carId).isEmpty()) {
+        Optional<Car> carOptional = carRepository.findById(carId);
+
+        if (carOptional.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY013_MSG, CARRIFY013_CODE);
         }
 
-        if (userRepository.findById(userId).isEmpty()) {
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        if (userOptional.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
         }
         if (rentRepository.findFirstByUser_IdAndEndAtIsNull(userId).isPresent()) {
@@ -211,11 +217,12 @@ public class RentService {
         Rent rent = Rent.builder()
                 .distance(0)
                 .createdAt(LocalDateTime.now())
-                .car(Car.builder().id(carId).build())
-                .user(User.builder().id(userId).build())
+                .car(carOptional.get())
+                .user(userOptional.get())
                 .build();
 
         Rent savedRent = rentRepository.save(rent);
+
         if (savedRent == null) {
             throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
         }
