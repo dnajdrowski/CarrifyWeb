@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Rent;
 
+import com.carrify.web.carrifyweb.model.Car.CarDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,7 @@ public class RentDTO {
     private String createdAt;
     private String endAt;
     private Integer userId;
-    private Integer carId;
+    private CarDTO car;
 
     public RentDTO(Rent rent) {
         this.id = rent.getId();
@@ -23,6 +24,6 @@ public class RentDTO {
         if(rent.getEndAt() != null)
             this.endAt = rent.getEndAt().toString();
         this.userId = rent.getUser().getId();
-        this.carId = rent.getCar().getId();
+        this.car = new CarDTO(rent.getCar());
     }
 }

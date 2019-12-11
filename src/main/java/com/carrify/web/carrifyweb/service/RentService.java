@@ -13,6 +13,7 @@ import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.repository.UserRepository;
 import com.carrify.web.carrifyweb.repository.VariableRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -39,6 +40,7 @@ public class RentService {
         this.variableRepository = variableRepository;
     }
 
+    @Transactional
     public List<RentDTO> getAllRents() {
         Iterable<Rent> rents = rentRepository.findAll();
         List<RentDTO> rentsCollected = StreamSupport.stream(rents.spliterator(), false)
@@ -51,6 +53,7 @@ public class RentService {
         return rentsCollected;
     }
 
+    @Transactional
     public List<RentDTO> getAllUserRents(String userId) {
         int id;
         try {
@@ -70,6 +73,7 @@ public class RentService {
         return rentsCollected;
     }
 
+    @Transactional
     public RentDTO getUserActiveRent(String userId) {
         int id;
         try {
@@ -86,6 +90,7 @@ public class RentService {
         }
     }
 
+    @Transactional
     public List<RentDTO> getAllCarRents(String carId) {
         int id;
         try {
@@ -105,6 +110,7 @@ public class RentService {
         return rentsCollected;
     }
 
+    @Transactional
     public RentDTO getRentById(String rentId) {
         int id;
         try {
@@ -121,6 +127,7 @@ public class RentService {
         }
     }
 
+    @Transactional
     public RentDTO finishRent(String rentId) {
         int id;
         try {
@@ -183,6 +190,7 @@ public class RentService {
         return new RentDTO(rent);
     }
 
+    @Transactional
     public RentDTO startRent(Integer userId, Integer carId) {
 
         if (carRepository.findById(carId).isEmpty()) {
