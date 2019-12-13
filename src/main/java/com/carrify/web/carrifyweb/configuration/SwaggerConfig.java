@@ -30,7 +30,8 @@ public class SwaggerConfig {
                         new Tag("Authorization", "All about authorization"),
                         new Tag("Region Zone", "All about region zones"),
                         new Tag("Rents", "All about rents"),
-                        new Tag("Reservations", "All about reservations")
+                        new Tag("Reservations", "All about reservations"),
+                        new Tag("Driver licence", "All about driver licences")
                 )
                 .apiInfo(apiInfo());
     }
