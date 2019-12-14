@@ -1,25 +1,25 @@
 # Carrify 
-### Group Project - WEB & ANDROID APPLICATION
+### Group Project - REST API & ANDROID APPLICATION
 
 
 **CEO & Developers:** Krzysztof Serocki and Daniel Najdrowski
 
 **Contact:** ___carrifydevelopment@gmail.com___
 
-### WEB-APP-AND-REST-API-GOALS:
-- management of clients registered in android application,
-- management of cars connected in android applications,
-- management of rentals that are covered by the android application,
-- controlling employees (relocators),
-- access to statistics for the use of a period of time.
+### REST-API-GOALS:
+- management of clients registered in android application
+- management of cars connected in android applications
+- management of rentals that are covered by the android application
+- management of fees in application
+- menagement of reservations that are coverd by the android application
 
 ### ANDROID-APP-GOALS:
- - customer registration and login using a phone number and email,
- - overview of available cars on the map (main screen),
- - adding a card and topping up the wallet,
- - the possibility of reserving a car for 15 minutes and possibity to extend to 20 minutes,
- - the possibility of renting a car using the QR code and the fee charged per minute,
- - travel history review - date, duration and distance + route on the map,
+ - customer registration and login using a phone number and email
+ - overview of available cars on the map (main screen)
+ - adding a card and topping up the wallet
+ - the possibility of reserving a car for 15 minutes and possibity to extend to 20 minutes
+ - the possibility of renting a car using the QR code and the fee charged per minute
+ - travel history review - date, duration and distance, route on the map
  - application description, so-called "How it works"
  - the possibility of reporting a problem using the application form
 
@@ -29,22 +29,22 @@
 - [x] Create database for our Web and Android application.
 - [ ] Create REST API for Web and Android application.
 - [ ] Create Android application.
-- [ ] Create WEB Application.
 
 ## TECHNOLOGIES
 
-#### WEB-APP, REST API AND DATABASE:
+#### REST API AND DATABASE:
 - MySQL
-- MariaDB
 - Java 11
 - Spring 5.0
 - SpringBoot 2.0
-- Spring Data with Hibernate.
-- Spring REST.
-- JavaScript
-- jQuery
-- Semantic UI.
+- Spring Data with Hibernate
+- Spring REST
+- Spring Security
+- JWT
 - Swagger2
+- JUnit 5
+- Mockito
+- Java Docs
 
 #### ANDROID-APP
 - Java 11
