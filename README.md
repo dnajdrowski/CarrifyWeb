@@ -92,8 +92,8 @@ In this case first request may take longer to process.
 ```
 3. Feel free to use it.
 #### DATABASE DIAGRAM:
-![DATABASE DIAGRAM](https://github.com/dnajdrowski/CarrifyWeb/blob/master/DATABASE/CarrifyDatabase.png)
+![DATABASE DIAGRAM](https://github.com/dnajdrowski/CarrifyWeb/blob/master/database/CarrifyDatabase.png)
 
 ## WORK AND PROGRESS PLAN:
-![WORK_PROGRESS](https://github.com/dnajdrowski/CarrifyWeb/blob/master/DATABASE/workPlanAndProgress.png)
+![WORK_PROGRESS](https://github.com/dnajdrowski/CarrifyWeb/blob/master/database/workPlanAndProgress.png)
 
