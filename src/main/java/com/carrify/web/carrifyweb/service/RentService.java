@@ -214,6 +214,7 @@ public class RentService {
             throw new ApiBadRequestException(CARRIFY017_MSG, CARRIFY017_CODE);
         }
 
+        log.info(LocalDateTime.now().toString());
         Rent rent = Rent.builder()
                 .distance(0)
                 .createdAt(LocalDateTime.now())

@@ -1,6 +1,7 @@
 package com.carrify.web.carrifyweb.model.User;
 
 import com.carrify.web.carrifyweb.model.Card.Card;
+import com.carrify.web.carrifyweb.model.DriverLicence.DriverLicence;
 import com.carrify.web.carrifyweb.model.Reservation.Reservation;
 import com.carrify.web.carrifyweb.model.Role.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -70,6 +71,8 @@ public class User {
     @JsonManagedReference
     private List<Reservation> rents = new ArrayList<>();
 
-
+    public User(int id) {
+        this.id = id;
+    }
 }
 

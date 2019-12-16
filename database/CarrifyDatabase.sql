@@ -12,10 +12,9 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `driver_licence` (
-`id` int PRIMARY KEY AUTO_INCREMENT,
-`img_front` LONGBLOB NOT NULL,
-`img_revers` LONGBLOB NOT NULL,
-`user_id` int NOT NULL
+`id` int PRIMARY KEY,
+`img_front` varchar(255) NOT NULL,
+`img_revers` varchar(255) NOT NULL
 );
 
 CREATE TABLE `card` (
@@ -143,8 +142,6 @@ CREATE TABLE `region_zone_coords` (
 ALTER TABLE `users` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
 
 ALTER TABLE `card` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `driver_licence` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `car_location_log` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 
