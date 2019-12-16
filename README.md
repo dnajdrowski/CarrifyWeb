@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/dnajdrowski/CarrifyWeb.svg?style=svg&circle-token=12894a1f450d3cedaa340a8bb01ebdfb04b4d7bf)](https://circleci.com/gh/dnajdrowski/CarrifyWeb)
+
 # Carrify 
 ### Group Project - REST API & ANDROID APPLICATION
 
