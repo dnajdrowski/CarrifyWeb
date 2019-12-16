@@ -23,7 +23,7 @@ class UserTest {
 
     @Test
     void checkValidUserId() {
-        Integer expected = 3;
+        Integer expected = 2;
         assertEquals(expected, user.getId());
     }
 
