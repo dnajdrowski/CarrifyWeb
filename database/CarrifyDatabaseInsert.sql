@@ -84,8 +84,5 @@ VALUES ('reservationTime', '15'),
     ('pricePerMinute', '80'),
     ('pricePerKm', '70');
 
-INSERT INTO `reservation` (`user_id`, `car_id`, `state`, `can_extend`, `created_at`, `finished_at`)
-VALUES (1, 1, 0, 1,'2019-11-21 21:00:00', '2019-11-21 21:15:00');
-
 
 

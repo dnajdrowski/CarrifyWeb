@@ -11,7 +11,6 @@ import com.carrify.web.carrifyweb.repository.UserRepository;
 import com.carrify.web.carrifyweb.request.AuthRequest;
 import com.carrify.web.carrifyweb.response.AuthResponse;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
