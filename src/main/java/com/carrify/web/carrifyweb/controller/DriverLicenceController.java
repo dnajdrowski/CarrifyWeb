@@ -1,14 +1,18 @@
 package com.carrify.web.carrifyweb.controller;
 
 import com.carrify.web.carrifyweb.model.DriverLicence.DriverLicence;
+import com.carrify.web.carrifyweb.request.DriverLicenceRequest;
 import com.carrify.web.carrifyweb.service.DriverLicenceService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.util.List;
 
@@ -29,8 +33,16 @@ public class DriverLicenceController {
         return ResponseEntity.ok(driverLicenceService.getAllDriverLicences());
     }
 
-    @PostMapping("/user/{id}/uploadFront")
-    public ResponseEntity uploadFrontImage(@PathVariable("id") String userId, @RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(driverLicenceService.uploadFrontDriverLicenceImage(userId, file));
+    @PostMapping("/user/{id}/upload")
+    public ResponseEntity uploadOrUpdateDriverLicence(@PathVariable("id") String id, @RequestParam("front") MultipartFile frontImage,
+                                           @RequestParam("reverse") MultipartFile reverseImage) {
+        return ResponseEntity.ok(driverLicenceService.uploadDriverLicence(id, frontImage, reverseImage ));
+    }
+
+    @PostMapping("/user/{id}/verify")
+    public ResponseEntity verifyDriverLicence(@PathVariable("id") String id, @Valid @RequestBody DriverLicenceRequest driverLicenceRequest,
+                                              BindingResult results) {
+        driverLicenceService.validateDriverLicenceRequest(results);
+        return ResponseEntity.ok(driverLicenceService.verifyDriverLicence(id, driverLicenceRequest.getExpireDate(), results));
     }
 }

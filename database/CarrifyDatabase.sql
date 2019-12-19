@@ -8,13 +8,15 @@ CREATE TABLE `users` (
   `latitude` double,
   `longitude` double,
   `role_id` int,
-  `token` varchar(255) UNIQUE
+  `token` varchar(255) UNIQUE,
+  `verified` int default 0
 );
 
 CREATE TABLE `driver_licence` (
 `id` int PRIMARY KEY,
-`img_front` varchar(255) NOT NULL,
-`img_revers` varchar(255) NOT NULL
+`img_front` longblob NOT NULL,
+`img_revers` longblob NOT NULL,
+`expire_date` date
 );
 
 CREATE TABLE `card` (

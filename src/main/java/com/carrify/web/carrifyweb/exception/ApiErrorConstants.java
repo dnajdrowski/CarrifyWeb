@@ -59,4 +59,17 @@ public class ApiErrorConstants {
     public static final String CARRIFY016_MSG = "User already has rental.";
     public static final String CARRIFY017_CODE = "CARRIFY-017";
     public static final String CARRIFY017_MSG = "Car is already rented.";
+    public static final String CARRIFY018_CODE = "CARRIFY-018";
+    public static final String CARRIFY018_MSG = "Driver licence front image can't be empty.";
+    public static final String CARRIFY019_CODE = "CARRIFY-019";
+    public static final String CARRIFY019_MSG = "Driver licence reverse image can't be empty.";
+    public static final String CARRIFY020_CODE = "CARRIFY-020";
+    public static final String CARRIFY020_MSG = "Driver licence already exists.";
+    public static final String CARRIFY021_CODE = "CARRIFY-021";
+    public static final String CARRIFY021_MSG = "Driver licence has already been verified.";
+    public static final String CARRIFY022_CODE = "CARRIFY-022";
+    public static final String CARRIFY022_MSG = "Driver licence expire date can't be empty.";
+    public static final String CARRIFY023_CODE = "CARRIFY-023";
+    public static final String CARRIFY023_MSG = "Driver licence expire date must be a date in the future.";
+
 }
