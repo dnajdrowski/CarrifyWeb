@@ -49,6 +49,9 @@ public class User {
     @Column(name = "token", unique = true)
     private String token;
 
+    @Column(name = "verified")
+    private Integer verified;
+
     @OneToOne
     @JoinColumn(name = "role_id")
     private Role role;

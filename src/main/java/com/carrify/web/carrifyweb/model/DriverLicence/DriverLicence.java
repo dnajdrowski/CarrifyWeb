@@ -4,6 +4,7 @@ import com.carrify.web.carrifyweb.model.User.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -19,10 +20,13 @@ public class DriverLicence {
     private Integer id;
 
     @Column(name = "img_front", nullable = false)
-    private String imgFront;
+    private byte[] imgFront;
 
     @Column(name = "img_revers", nullable = false)
-    private String imgRevers;
+    private byte[] imgRevers;
+
+    @Column(name = "expire_date")
+    private LocalDate expireDate;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId

@@ -33,6 +33,6 @@ public class CarLocationLog  {
     @JoinColumn(name = "car_id")
     @JsonBackReference
     private Car car;
-    
+
 
 }
