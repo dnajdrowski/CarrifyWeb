@@ -4,15 +4,14 @@ import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
 import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Car.Car;
+import com.carrify.web.carrifyweb.model.DriverLicence.DriverLicence;
 import com.carrify.web.carrifyweb.model.Variable.Variable;
-import com.carrify.web.carrifyweb.repository.CarRepository;
+import com.carrify.web.carrifyweb.repository.*;
 import com.carrify.web.carrifyweb.model.Rent.Rent;
 import com.carrify.web.carrifyweb.model.Rent.RentDTO;
-import com.carrify.web.carrifyweb.repository.RentRepository;
 import com.carrify.web.carrifyweb.model.User.User;
-import com.carrify.web.carrifyweb.repository.UserRepository;
-import com.carrify.web.carrifyweb.repository.VariableRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,12 +31,14 @@ public class RentService {
 
     private final RentRepository rentRepository;
     private final CarRepository carRepository;
+    private final DriverLicenceRepository driverLicenceRepository;
     private final UserRepository userRepository;
     private final VariableRepository variableRepository;
 
-    public RentService(RentRepository rentRepository, CarRepository carRepository, UserRepository userRepository, VariableRepository variableRepository) {
+    public RentService(RentRepository rentRepository, CarRepository carRepository, DriverLicenceRepository driverLicenceRepository, UserRepository userRepository, VariableRepository variableRepository) {
         this.rentRepository = rentRepository;
         this.carRepository = carRepository;
+        this.driverLicenceRepository = driverLicenceRepository;
         this.userRepository = userRepository;
         this.variableRepository = variableRepository;
     }
@@ -195,19 +196,29 @@ public class RentService {
     @Transactional
     public RentDTO startRent(Integer userId, Integer carId) {
 
-        Optional<Car> carOptional = carRepository.findById(carId);
+        Optional<DriverLicence> driverLicence = driverLicenceRepository.findById(userId);
 
-        if (carOptional.isEmpty()) {
-            throw new ApiNotFoundException(CARRIFY013_MSG, CARRIFY013_CODE);
+        if(driverLicence.isEmpty()) {
+            throw new ApiNotFoundException(CARRIFY024_MSG, CARRIFY024_CODE);
         }
 
         Optional<User> userOptional = userRepository.findById(userId);
+
+        if(userOptional.get().getVerified() == 0) {
+            throw new ApiBadRequestException(CARRIFY025_MSG, CARRIFY025_CODE);
+        }
 
         if (userOptional.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
         }
         if (rentRepository.findFirstByUser_IdAndEndAtIsNull(userId).isPresent()) {
             throw new ApiBadRequestException(CARRIFY016_MSG, CARRIFY016_CODE);
+        }
+
+        Optional<Car> carOptional = carRepository.findById(carId);
+
+        if (carOptional.isEmpty()) {
+            throw new ApiNotFoundException(CARRIFY013_MSG, CARRIFY013_CODE);
         }
 
         if (rentRepository.findFirstByCar_IdAndEndAtIsNull(carId).isPresent()) {

@@ -134,6 +134,23 @@ public class DriverLicenceService {
         return expireDate.toString();
     }
 
+    public Integer checkIfUserSendDriverLicence(String userId) {
+        int id;
+        try {
+            id = Integer.parseInt(userId);
+        } catch (NumberFormatException e) {
+            throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
+        }
+
+        Optional<DriverLicence> driverLicence = driverLicenceRepository.findById(id);
+
+        if(driverLicence.isEmpty()) {
+            return 0;
+        }
+
+        return 1;
+    }
+
 
     public void validateDriverLicenceRequest(BindingResult results) {
         if(results.hasErrors()) {

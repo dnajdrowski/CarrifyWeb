@@ -33,6 +33,11 @@ public class DriverLicenceController {
         return ResponseEntity.ok(driverLicenceService.getAllDriverLicences());
     }
 
+    @GetMapping("/user/{id}/check")
+    public ResponseEntity<Integer> checkIfUserSendDriverLicence(@PathVariable("id") String id) {
+        return ResponseEntity.ok(driverLicenceService.checkIfUserSendDriverLicence(id));
+    }
+
     @PostMapping("/user/{id}/upload")
     public ResponseEntity uploadOrUpdateDriverLicence(@PathVariable("id") String id, @RequestParam("front") MultipartFile frontImage,
                                            @RequestParam("reverse") MultipartFile reverseImage) {

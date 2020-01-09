@@ -71,5 +71,9 @@ public class ApiErrorConstants {
     public static final String CARRIFY022_MSG = "Driver licence expire date can't be empty.";
     public static final String CARRIFY023_CODE = "CARRIFY-023";
     public static final String CARRIFY023_MSG = "Driver licence expire date must be a date in the future.";
+    public static final String CARRIFY024_CODE = "CARRIFY-024";
+    public static final String CARRIFY024_MSG = "Driver licence not found.";
+    public static final String CARRIFY025_CODE = "CARRIFY-023";
+    public static final String CARRIFY025_MSG = "Driver licence has not been verified yet.";
 
 }
