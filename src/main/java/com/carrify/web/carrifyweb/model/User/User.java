@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.User;
 
+
 import com.carrify.web.carrifyweb.model.Card.Card;
 import com.carrify.web.carrifyweb.model.DriverLicence.DriverLicence;
 import com.carrify.web.carrifyweb.model.Reservation.Reservation;

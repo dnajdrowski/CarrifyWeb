@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Car;
 
+
 import com.carrify.web.carrifyweb.model.CarLocationLog.CarLocationLogDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

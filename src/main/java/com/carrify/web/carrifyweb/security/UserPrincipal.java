@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.security;
 
+
 import com.carrify.web.carrifyweb.model.User.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

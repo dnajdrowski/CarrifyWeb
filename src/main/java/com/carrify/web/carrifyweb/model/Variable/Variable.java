@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Variable;
 
+
 import lombok.*;
 
 import javax.persistence.*;

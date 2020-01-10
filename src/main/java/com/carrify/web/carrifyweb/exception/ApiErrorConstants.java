@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.exception;
 
+
 public class ApiErrorConstants {
 
     //VALIDATION ERRORS HAS TO START WITH 9**_CODE;

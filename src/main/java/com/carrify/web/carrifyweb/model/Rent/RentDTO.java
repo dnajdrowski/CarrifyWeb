@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Rent;
 
+
 import com.carrify.web.carrifyweb.model.Car.CarDTO;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.RegionZone;
 
+
 import com.carrify.web.carrifyweb.model.RegionZoneCoords.RegionZoneCoordsDTO;
 import lombok.Getter;
 import lombok.Setter;

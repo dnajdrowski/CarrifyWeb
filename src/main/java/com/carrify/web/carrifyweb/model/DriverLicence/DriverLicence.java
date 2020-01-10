@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.DriverLicence;
 
+
 import com.carrify.web.carrifyweb.model.User.User;
 import lombok.*;
 

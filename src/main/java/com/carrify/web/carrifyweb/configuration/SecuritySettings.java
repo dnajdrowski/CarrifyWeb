@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.configuration;
 
+
 import com.carrify.web.carrifyweb.security.JwtAuthenticationEntryPoint;
 import com.carrify.web.carrifyweb.security.JwtAuthenticationFilter;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;

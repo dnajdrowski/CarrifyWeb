@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Role;
 
+
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.CarLocationLog;
 
+
 import com.carrify.web.carrifyweb.model.Car.Car;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;

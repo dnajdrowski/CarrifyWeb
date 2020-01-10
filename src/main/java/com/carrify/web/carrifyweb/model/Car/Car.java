@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Car;
 
+
 import com.carrify.web.carrifyweb.model.CarLocationLog.CarLocationLog;
 import com.carrify.web.carrifyweb.model.Rent.Rent;
 import com.carrify.web.carrifyweb.model.Reservation.Reservation;

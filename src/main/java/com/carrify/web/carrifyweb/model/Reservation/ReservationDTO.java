@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Reservation;
 
+
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.RegionZone;
 
+
 import com.carrify.web.carrifyweb.model.RegionZoneCoords.RegionZoneCoords;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;

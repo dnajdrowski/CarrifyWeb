@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.exception;
 
+
 import lombok.Getter;
 
 @Getter

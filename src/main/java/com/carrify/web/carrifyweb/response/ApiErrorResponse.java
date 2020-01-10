@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.response;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

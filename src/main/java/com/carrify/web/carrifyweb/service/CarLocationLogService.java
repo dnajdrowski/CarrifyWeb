@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.service;
 
+
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.CarLocationLog.CarLocationLog;
 import com.carrify.web.carrifyweb.model.CarLocationLog.CarLocationLogDTO;
