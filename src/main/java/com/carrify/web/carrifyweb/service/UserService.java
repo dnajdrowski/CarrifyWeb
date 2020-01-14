@@ -1,9 +1,9 @@
 package com.carrify.web.carrifyweb.service;
 
+import com.carrify.web.carrifyweb.exception.ApiErrorConstants;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.repository.UserRepository;
-import com.carrify.web.carrifyweb.exception.ApiErrorConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

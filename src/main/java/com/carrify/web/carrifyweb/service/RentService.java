@@ -204,13 +204,14 @@ public class RentService {
 
         Optional<User> userOptional = userRepository.findById(userId);
 
+        if (userOptional.isEmpty()) {
+            throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
+        }
+
         if(userOptional.get().getVerified() == 0) {
             throw new ApiBadRequestException(CARRIFY025_MSG, CARRIFY025_CODE);
         }
 
-        if (userOptional.isEmpty()) {
-            throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
-        }
         if (rentRepository.findFirstByUser_IdAndEndAtIsNull(userId).isPresent()) {
             throw new ApiBadRequestException(CARRIFY016_MSG, CARRIFY016_CODE);
         }

@@ -11,4 +11,5 @@ public class ApiErrorResponse {
 
     private String code;
     private String msg;
+
 }

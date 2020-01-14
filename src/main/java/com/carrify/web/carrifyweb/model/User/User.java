@@ -2,8 +2,10 @@ package com.carrify.web.carrifyweb.model.User;
 
 import com.carrify.web.carrifyweb.model.Card.Card;
 import com.carrify.web.carrifyweb.model.DriverLicence.DriverLicence;
+import com.carrify.web.carrifyweb.model.Rent.Rent;
 import com.carrify.web.carrifyweb.model.Reservation.Reservation;
 import com.carrify.web.carrifyweb.model.Role.Role;
+import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -72,7 +74,13 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
-    private List<Reservation> rents = new ArrayList<>();
+    private List<Rent> rents = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonManagedReference
+    private List<Wallet> wallets = new ArrayList<>();
 
     public User(int id) {
         this.id = id;

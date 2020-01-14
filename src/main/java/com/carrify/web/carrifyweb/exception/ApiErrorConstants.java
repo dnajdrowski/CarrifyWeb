@@ -75,5 +75,9 @@ public class ApiErrorConstants {
     public static final String CARRIFY024_MSG = "Driver licence not found.";
     public static final String CARRIFY025_CODE = "CARRIFY-023";
     public static final String CARRIFY025_MSG = "Driver licence has not been verified yet.";
+    public static final String CARRIFY026_CODE = "CARRIFY-026";
+    public static final String CARRIFY026_MSG = "Wallet not found.";
+    public static final String CARRIFY027_CODE = "CARRIFY-027";
+    public static final String CARRIFY027_MSG = "Wallet history not found.";
 
 }
