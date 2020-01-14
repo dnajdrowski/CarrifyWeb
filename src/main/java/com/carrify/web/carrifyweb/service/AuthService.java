@@ -6,20 +6,25 @@ import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiUnauthorizedException;
 import com.carrify.web.carrifyweb.model.Role.Role;
 import com.carrify.web.carrifyweb.model.User.User;
+import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.carrify.web.carrifyweb.repository.RoleRepository;
 import com.carrify.web.carrifyweb.repository.UserRepository;
+import com.carrify.web.carrifyweb.repository.WalletRepository;
 import com.carrify.web.carrifyweb.request.AuthRequest;
 import com.carrify.web.carrifyweb.response.AuthResponse;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;
+import org.apache.tomcat.jni.Local;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
@@ -31,14 +36,16 @@ public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final WalletRepository walletRepository;
     private final RoleRepository roleRepository;
 
     public AuthService(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider,
-                       PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
+                       PasswordEncoder passwordEncoder, UserRepository userRepository, WalletRepository walletRepository, RoleRepository roleRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.walletRepository = walletRepository;
         this.roleRepository = roleRepository;
     }
 
@@ -80,6 +87,7 @@ public class AuthService {
                 .build();
     }
 
+    @Transactional
     public AuthResponse register(AuthRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new ApiBadRequestException(ApiErrorConstants.CARRIFY005_MSG, ApiErrorConstants.CARRIFY005_CODE);
@@ -97,6 +105,14 @@ public class AuthService {
                 .phone(request.getPhone())
                 .build();
 
+        Wallet userWallet = Wallet.builder()
+                .user(user)
+                .amount(0)
+                .lastUpdate(LocalDateTime.now())
+                .operationType(2)
+                .build();
+
+
         String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);
 
@@ -104,7 +120,8 @@ public class AuthService {
         role.ifPresent(user::setRole);
 
         User savedUser = userRepository.save(user);
-        if (savedUser == null) {
+        Wallet savedWallet = walletRepository.save(userWallet);
+        if (savedUser == null || savedWallet == null) {
             throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
         }
 

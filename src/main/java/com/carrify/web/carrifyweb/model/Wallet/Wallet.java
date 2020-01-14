@@ -26,7 +26,7 @@ public class Wallet {
     @Column(name = "amount", nullable = false)
     private Integer amount;
 
-    @Column(name = "finished_at", nullable = false)
+    @Column(name = "operation_type", nullable = false)
     private Integer operationType;
 
     @ManyToOne(fetch = FetchType.LAZY)
