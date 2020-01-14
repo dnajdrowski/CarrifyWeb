@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Car;
 
+import com.carrify.web.carrifyweb.formatter.CarrifyDateTimeFormatter;
 import com.carrify.web.carrifyweb.model.CarLocationLog.CarLocationLogDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +30,7 @@ public class CarDTO {
         if(car.getLastLocation() != null)
             this.lastLocation = new CarLocationLogDTO(car.getLastLocation());
         this.mileage = car.getMileage();
-        this.lastService = car.getLastService().toString();
+        this.lastService = CarrifyDateTimeFormatter.formatDate(car.getLastService());
         this.carState = car.getCarState();
     }
 }

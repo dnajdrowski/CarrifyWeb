@@ -8,7 +8,7 @@ VALUES
 INSERT INTO
  `users` (`username`, `phone`, `password`, `personal_number`, `email`, `latitude`, `longitude`, `role_id`, `token`)
 VALUES
-('user1', '656454343', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '98091008874', 'jankowal@gmail.com', null, null, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NzQ3MTgxNzYsImV4cCI6MTU3NTMyMjk3NiwidXNlcklkIjoiMSJ9.mlfDxYqcrx65jS6Mi0ZQNA4f5IHJ28q-3vfwVFRh2LZGkWFTpalrovjR5HSmRx1Mwl8Lx4REhpxTF5RJInfvbQ'),
+('user1', '656454343', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '93091022874', 'jankowal@gmail.com', null, null, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1NzQ3MTgxNzYsImV4cCI6MTU3NTMyMjk3NiwidXNlcklkIjoiMSJ9.mlfDxYqcrx65jS6Mi0ZQNA4f5IHJ28q-3vfwVFRh2LZGkWFTpalrovjR5HSmRx1Mwl8Lx4REhpxTF5RJInfvbQ'),
 ('user2', '934323423', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi','97101034345', 'dnajdrowski@gmail.com', null, null, 2, null),
 ('user3', '734343312', '$2a$10$P/CZBZnx5wgeVNlEFcidLu2NY8xNloOWgMPVCmK1Otv9enikPkfVi', '99092049584','kserocki@gmail.com', null, null, 3, null);
 

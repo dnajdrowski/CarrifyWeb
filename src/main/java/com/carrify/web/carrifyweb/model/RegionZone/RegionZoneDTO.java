@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.RegionZone;
 
+import com.carrify.web.carrifyweb.formatter.CarrifyDateTimeFormatter;
 import com.carrify.web.carrifyweb.model.RegionZoneCoords.RegionZoneCoordsDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,7 @@ public class RegionZoneDTO {
         this.strokeWidth = regionZone.getStrokeWidth();
         this.strokeColor = regionZone.getStrokeColor();
         this.zoneColor = regionZone.getZoneColor();
-        this.createdAt = regionZone.getCreatedAt().toString();
+        this.createdAt = CarrifyDateTimeFormatter.formatDate(regionZone.getCreatedAt());
         this.regionZoneCoordsDTO = regionZone.getRegionZoneCoords().stream()
                 .map(RegionZoneCoordsDTO::new)
                 .collect(toList());

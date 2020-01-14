@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Wallet;
 
+import com.carrify.web.carrifyweb.formatter.CarrifyDateTimeFormatter;
 import com.carrify.web.carrifyweb.model.User.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,16 +12,16 @@ import java.time.LocalDateTime;
 public class WalletDTO {
 
     private Integer id;
-    private LocalDateTime lastUpdate;
+    private String lastUpdate;
     private Integer amount;
     private Integer operationType;
-    private User user;
+    private Integer user;
 
     public WalletDTO(Wallet wallet) {
         this.id = wallet.getId();
-        this.lastUpdate = wallet.getLastUpdate();
+        this.lastUpdate = CarrifyDateTimeFormatter.formatDate(wallet.getLastUpdate());
         this.amount = wallet.getAmount();
         this.operationType = wallet.getOperationType();
-        this.user = wallet.getUser();
+        this.user = wallet.getUser().getId();
     }
 }

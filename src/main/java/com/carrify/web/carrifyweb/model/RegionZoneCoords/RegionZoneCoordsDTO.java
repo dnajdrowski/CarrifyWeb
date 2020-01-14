@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.RegionZoneCoords;
 
+import com.carrify.web.carrifyweb.formatter.CarrifyDateTimeFormatter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,6 @@ public class RegionZoneCoordsDTO {
         this.id = regionZoneCoords.getId();
         this.latitude = regionZoneCoords.getLatitude();
         this.longitude = regionZoneCoords.getLongitude();
-        this.createdAt = regionZoneCoords.getCreatedAt().toString();
+        this.createdAt = CarrifyDateTimeFormatter.formatDate(regionZoneCoords.getCreatedAt());
     }
 }

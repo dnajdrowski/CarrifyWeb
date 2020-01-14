@@ -75,7 +75,8 @@ CREATE TABLE `user_wallet` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `amount` int NOT NULL DEFAULT 0,
-  `last_update` datetime NOT NULL
+  `last_update` datetime NOT NULL,
+  `operation_type` int DEFAULT 2
 );
 
 CREATE TABLE `transaction` (

@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.model.Rent;
 
+import com.carrify.web.carrifyweb.formatter.CarrifyDateTimeFormatter;
 import com.carrify.web.carrifyweb.model.Car.CarDTO;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +21,9 @@ public class RentDTO {
         this.id = rent.getId();
         this.distance = rent.getDistance();
         this.amount = rent.getAmount();
-        this.createdAt = rent.getCreatedAt().toString();
+        this.createdAt = CarrifyDateTimeFormatter.formatDate(rent.getCreatedAt());
         if(rent.getEndAt() != null)
-            this.endAt = rent.getEndAt().toString();
+            this.endAt = CarrifyDateTimeFormatter.formatDate(rent.getEndAt());
         this.userId = rent.getUser().getId();
         this.car = new CarDTO(rent.getCar());
     }

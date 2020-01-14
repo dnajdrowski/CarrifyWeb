@@ -39,18 +39,19 @@ public class WalletService {
 
     public WalletDTO topUpWallet(int userId, int amount) {
         Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            Wallet wallet = Wallet.builder()
-                    .amount(amount)
-                    .lastUpdate(LocalDateTime.now())
-                    .operationType(1)
-                    .user(user)
-                    .build();
-            walletRepository.save(wallet);
-            return new WalletDTO(wallet);
-        } else
+        if (optionalUser.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
+        }
+
+        User user = optionalUser.get();
+        Wallet wallet = Wallet.builder()
+                .amount(amount)
+                .lastUpdate(LocalDateTime.now())
+                .operationType(1)
+                .user(user)
+                .build();
+        walletRepository.save(wallet);
+        return new WalletDTO(wallet);
     }
 
     public List<WalletDTO> getWalletOperationsByUserId(String userId) {

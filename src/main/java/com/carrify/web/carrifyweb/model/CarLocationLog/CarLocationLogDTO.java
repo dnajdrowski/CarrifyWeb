@@ -1,6 +1,7 @@
 package com.carrify.web.carrifyweb.model.CarLocationLog;
 
 
+import com.carrify.web.carrifyweb.formatter.CarrifyDateTimeFormatter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,6 @@ public class CarLocationLogDTO {
         this.id = carLocationLog.getId();
         this.latitude = carLocationLog.getLatitude();
         this.longitude = carLocationLog.getLongitude();
-        this.createdAt = carLocationLog.getCreatedAt().toString();
+        this.createdAt = CarrifyDateTimeFormatter.formatDate(carLocationLog.getCreatedAt());
     }
 }
