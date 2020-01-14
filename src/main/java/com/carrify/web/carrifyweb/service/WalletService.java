@@ -43,9 +43,11 @@ public class WalletService {
             throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
         }
 
+
+
         User user = optionalUser.get();
         Wallet wallet = Wallet.builder()
-                .amount(amount)
+                .amount(amount + walletRepository.getFirstByUserIdOrderByIdDesc(userId).get().getAmount())
                 .lastUpdate(LocalDateTime.now())
                 .operationType(1)
                 .user(user)

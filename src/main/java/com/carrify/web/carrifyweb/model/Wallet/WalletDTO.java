@@ -1,11 +1,8 @@
 package com.carrify.web.carrifyweb.model.Wallet;
 
 import com.carrify.web.carrifyweb.formatter.CarrifyDateTimeFormatter;
-import com.carrify.web.carrifyweb.model.User.User;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
