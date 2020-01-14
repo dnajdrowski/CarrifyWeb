@@ -60,12 +60,6 @@
 ## API:
 Application is deployed to [Heroku](https://www.heroku.com)
 
-Heroku Credentials:
-```
-  email: carrifydevelopment@gmail.com
-  password: Carrifyadmin123!!
-```
-
 API is available on the
 ```
   https://carrify.herokuapp.com/api
@@ -81,16 +75,6 @@ When API is not used for a while, application stops and restarts after first req
 In this case first request may take longer to process.
 
 ## DATABASE:
-
-#### DATABASE CREDENTIALS:
-
-1. Go to [db4free](https://www.db4free.net/phpMyAdmin/index.php)
-2. Sign in using credentials below:
-``` 
-  login: carryifyadmin
-  password: Carrifyadmin123
-```
-3. Feel free to use it.
 #### DATABASE DIAGRAM:
 ![DATABASE DIAGRAM](https://github.com/dnajdrowski/CarrifyWeb/blob/master/database/CarrifyDatabase.png)
 
