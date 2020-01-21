@@ -86,10 +86,9 @@ public class WalletService {
             throw new ApiNotFoundException(CARRIFY026_MSG, CARRIFY026_CODE);
         }
 
-        Iterable<Transaction> walletTransactions = transactionRepository.findAllByWalletId(id);
+        Iterable<Transaction> walletTransactions = transactionRepository.findAllByWalletIdOrderByIdDesc(id);
 
         return StreamSupport.stream(walletTransactions.spliterator(), false)
-                .sorted(Comparator.comparingInt(Transaction::getId))
                 .map(TransactionDTO::new)
                 .collect(toList());
     }

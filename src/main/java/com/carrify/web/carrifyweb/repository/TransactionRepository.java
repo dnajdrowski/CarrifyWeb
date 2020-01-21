@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction, Integer> {
 
-    Iterable<Transaction> findAllByWalletId(Integer id);
+    Iterable<Transaction> findAllByWalletIdOrderByIdDesc(Integer id);
 }
