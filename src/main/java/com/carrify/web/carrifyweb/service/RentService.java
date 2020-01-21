@@ -5,13 +5,16 @@ import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Car.Car;
 import com.carrify.web.carrifyweb.model.DriverLicence.DriverLicence;
+import com.carrify.web.carrifyweb.model.Transaction.Transaction;
 import com.carrify.web.carrifyweb.model.Variable.Variable;
+import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.carrify.web.carrifyweb.repository.*;
 import com.carrify.web.carrifyweb.model.Rent.Rent;
 import com.carrify.web.carrifyweb.model.Rent.RentDTO;
 import com.carrify.web.carrifyweb.model.User.User;
+import io.swagger.annotations.Api;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +30,7 @@ import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class RentService {
 
     private final RentRepository rentRepository;
@@ -34,14 +38,8 @@ public class RentService {
     private final DriverLicenceRepository driverLicenceRepository;
     private final UserRepository userRepository;
     private final VariableRepository variableRepository;
-
-    public RentService(RentRepository rentRepository, CarRepository carRepository, DriverLicenceRepository driverLicenceRepository, UserRepository userRepository, VariableRepository variableRepository) {
-        this.rentRepository = rentRepository;
-        this.carRepository = carRepository;
-        this.driverLicenceRepository = driverLicenceRepository;
-        this.userRepository = userRepository;
-        this.variableRepository = variableRepository;
-    }
+    private final TransactionRepository transactionRepository;
+    private final WalletRepository walletRepository;
 
     @Transactional
     public List<RentDTO> getAllRents() {
@@ -185,10 +183,39 @@ public class RentService {
         LocalDateTime rentalStartTime = rent.getCreatedAt();
         LocalDateTime rentalFinishTime = LocalDateTime.now();
         long rentTimeInMinutes = Duration.between(rentalStartTime, rentalFinishTime).toMinutes();
+        int amount = 2000 / 1000 * pricePerKm + (int) rentTimeInMinutes * pricePerMinute;
         rent.setEndAt(rentalFinishTime);
         rent.setDistance(2000);
-        rent.setAmount(2000 / 1000 * pricePerKm + (int) rentTimeInMinutes * pricePerMinute);
+        rent.setAmount(amount);
         rentRepository.save(rent);
+
+        Optional<Wallet> optionalWallet = walletRepository.findById(rent.getUser().getId());
+
+        if (optionalWallet.isEmpty()) {
+            //TODO
+        }
+
+        Wallet wallet = optionalWallet.get();
+
+        int balance = wallet.getAmount() - amount;
+
+        if (balance < 0) {
+            throw new ApiBadRequestException(CARRIFY028_MSG, CARRIFY028_CODE);
+        }
+
+        wallet.setAmount(wallet.getAmount() - amount);
+        walletRepository.save(wallet);
+
+        Transaction transaction = Transaction.builder()
+                .amount(amount)
+                .balance(balance)
+                .operationType(1)
+                .createdAt(rentalFinishTime)
+                .rent(rent)
+                .wallet(wallet)
+                .build();
+
+        transactionRepository.save(transaction);
 
         return new RentDTO(rent);
     }

@@ -58,10 +58,14 @@ public class WalletService {
         }
 
         Wallet wallet = walletOptional.get();
-        wallet.setAmount(wallet.getAmount() + amount);
+
+        int balance = wallet.getAmount() + amount;
+        wallet.setAmount(balance);
 
         Transaction transaction = Transaction.builder()
                 .amount(amount)
+                .balance(balance)
+                .operationType(0)
                 .createdAt(LocalDateTime.now())
                 .wallet(wallet)
                 .build();

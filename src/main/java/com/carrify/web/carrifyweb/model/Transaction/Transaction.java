@@ -24,6 +24,12 @@ public class Transaction {
     @Column(name = "amount", nullable = false)
     private Integer amount;
 
+    @Column(name = "balance", nullable = false)
+    private Integer balance;
+
+    @Column(name = "operation_type", nullable = false)
+    private Integer operationType;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
