@@ -5,14 +5,13 @@ import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Car.Car;
 import com.carrify.web.carrifyweb.model.DriverLicence.DriverLicence;
+import com.carrify.web.carrifyweb.model.Rent.Rent;
+import com.carrify.web.carrifyweb.model.Rent.RentDTO;
 import com.carrify.web.carrifyweb.model.Transaction.Transaction;
+import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.model.Variable.Variable;
 import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.carrify.web.carrifyweb.repository.*;
-import com.carrify.web.carrifyweb.model.Rent.Rent;
-import com.carrify.web.carrifyweb.model.Rent.RentDTO;
-import com.carrify.web.carrifyweb.model.User.User;
-import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -156,13 +155,13 @@ public class RentService {
 
         Optional<Variable> pricePerMinuteOptional = variableRepository.findByName("pricePerMinute");
 
-        if(pricePerMinuteOptional.isEmpty()) {
+        if (pricePerMinuteOptional.isEmpty()) {
             throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
         }
 
         Optional<Variable> pricePerKmOptional = variableRepository.findByName("pricePerKm");
 
-        if(pricePerKmOptional.isEmpty()) {
+        if (pricePerKmOptional.isEmpty()) {
             throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
         }
 
@@ -225,7 +224,7 @@ public class RentService {
 
         Optional<DriverLicence> driverLicence = driverLicenceRepository.findById(userId);
 
-        if(driverLicence.isEmpty()) {
+        if (driverLicence.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY024_MSG, CARRIFY024_CODE);
         }
 
@@ -235,7 +234,7 @@ public class RentService {
             throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
         }
 
-        if(userOptional.get().getVerified() == 0) {
+        if (userOptional.get().getVerified() == 0) {
             throw new ApiBadRequestException(CARRIFY025_MSG, CARRIFY025_CODE);
         }
 

@@ -5,19 +5,17 @@ import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Transaction.Transaction;
 import com.carrify.web.carrifyweb.model.Transaction.TransactionDTO;
-import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.carrify.web.carrifyweb.model.Wallet.WalletDTO;
 import com.carrify.web.carrifyweb.repository.TransactionRepository;
-import com.carrify.web.carrifyweb.repository.UserRepository;
 import com.carrify.web.carrifyweb.repository.WalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -73,7 +71,7 @@ public class WalletService {
         Wallet savedWallet = walletRepository.save(wallet);
         Transaction savedTransaction = transactionRepository.save(transaction);
 
-        if(savedWallet == null || savedTransaction == null) {
+        if (savedWallet == null || savedTransaction == null) {
             throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
         }
 
@@ -91,6 +89,7 @@ public class WalletService {
         Iterable<Transaction> walletTransactions = transactionRepository.findAllByWalletId(id);
 
         return StreamSupport.stream(walletTransactions.spliterator(), false)
+                .sorted(Comparator.comparingInt(Transaction::getId))
                 .map(TransactionDTO::new)
                 .collect(toList());
     }
