@@ -77,7 +77,7 @@ public class WalletService {
     }
 
     public List<TransactionDTO> getWalletTransactionHistory(String walletId) {
-        Integer id;
+        int id;
         try {
             id = Integer.parseInt(walletId);
         } catch (NumberFormatException e) {
@@ -85,14 +85,10 @@ public class WalletService {
         }
 
         Iterable<Transaction> walletTransactions = transactionRepository.findAllByWalletId(id);
-        List<TransactionDTO> transactions = StreamSupport.stream(walletTransactions.spliterator(), false)
+
+        return StreamSupport.stream(walletTransactions.spliterator(), false)
                 .map(TransactionDTO::new)
                 .collect(toList());
-
-        if (transactions.isEmpty()) {
-            throw new ApiNotFoundException(CARRIFY027_MSG, CARRIFY027_CODE);
-        }
-        return transactions;
     }
 
 
