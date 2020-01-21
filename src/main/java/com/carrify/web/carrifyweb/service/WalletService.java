@@ -1,14 +1,22 @@
 package com.carrify.web.carrifyweb.service;
 
+import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
+import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
+import com.carrify.web.carrifyweb.model.Transaction.Transaction;
+import com.carrify.web.carrifyweb.model.Transaction.TransactionDTO;
 import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.carrify.web.carrifyweb.model.Wallet.WalletDTO;
+import com.carrify.web.carrifyweb.repository.TransactionRepository;
 import com.carrify.web.carrifyweb.repository.UserRepository;
 import com.carrify.web.carrifyweb.repository.WalletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -22,49 +30,83 @@ import static java.util.stream.Collectors.toList;
 public class WalletService {
 
     private final WalletRepository walletRepository;
-    private final UserRepository userRepository;
+    private final TransactionRepository transactionRepository;
 
-    public WalletService(WalletRepository walletRepository, UserRepository userRepository) {
+    public WalletService(WalletRepository walletRepository, TransactionRepository transactionRepository) {
         this.walletRepository = walletRepository;
-        this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
     }
 
-    public WalletDTO getWalletByUserId(String userId) {
-        Optional<Wallet> optionalWallet = walletRepository.getFirstByUserIdOrderByIdDesc(Integer.parseInt(userId));
-        if (optionalWallet.isPresent())
-            return new WalletDTO(optionalWallet.get());
-        else
+    public WalletDTO getWalletById(String walletId) {
+        int id;
+        try {
+            id = Integer.parseInt(walletId);
+        } catch (NumberFormatException e) {
             throw new ApiNotFoundException(CARRIFY026_MSG, CARRIFY026_CODE);
+        }
+        Optional<Wallet> optionalWallet = walletRepository.findById(id);
+        if (optionalWallet.isEmpty())
+            throw new ApiNotFoundException(CARRIFY026_MSG, CARRIFY026_CODE);
+
+        return new WalletDTO(optionalWallet.get());
     }
 
-    public WalletDTO topUpWallet(int userId, int amount) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if (optionalUser.isEmpty()) {
-            throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
+    public WalletDTO topUpWallet(int walletId, int amount) {
+        Optional<Wallet> walletOptional = walletRepository.findById(walletId);
+        if (walletOptional.isEmpty()) {
+            throw new ApiNotFoundException(CARRIFY026_MSG, CARRIFY026_CODE);
         }
 
+        Wallet wallet = walletOptional.get();
+        wallet.setAmount(wallet.getAmount() + amount);
 
-
-        User user = optionalUser.get();
-        Wallet wallet = Wallet.builder()
-                .amount(amount + walletRepository.getFirstByUserIdOrderByIdDesc(userId).get().getAmount())
-                .lastUpdate(LocalDateTime.now())
-                .operationType(1)
-                .user(user)
+        Transaction transaction = Transaction.builder()
+                .amount(amount)
+                .createdAt(LocalDateTime.now())
+                .wallet(wallet)
                 .build();
-        walletRepository.save(wallet);
+
+        Wallet savedWallet = walletRepository.save(wallet);
+        Transaction savedTransaction = transactionRepository.save(transaction);
+
+        if(savedWallet == null || savedTransaction == null) {
+            throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
+        }
+
         return new WalletDTO(wallet);
     }
 
-    public List<WalletDTO> getWalletOperationsByUserId(String userId) {
-        Iterable<Wallet> wallets = walletRepository.findAllByUserId(Integer.parseInt(userId));
-        List<WalletDTO> walletCollected = StreamSupport.stream(wallets.spliterator(), false)
-                .map(WalletDTO::new)
+    public List<TransactionDTO> getWalletTransactionHistory(String walletId) {
+        Integer id;
+        try {
+            id = Integer.parseInt(walletId);
+        } catch (NumberFormatException e) {
+            throw new ApiNotFoundException(CARRIFY026_MSG, CARRIFY026_CODE);
+        }
+
+        Iterable<Transaction> walletTransactions = transactionRepository.findAllByWalletId(id);
+        List<TransactionDTO> transactions = StreamSupport.stream(walletTransactions.spliterator(), false)
+                .map(TransactionDTO::new)
                 .collect(toList());
 
-        if (walletCollected.isEmpty()) {
+        if (transactions.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY027_MSG, CARRIFY027_CODE);
         }
-        return walletCollected;
+        return transactions;
+    }
+
+
+    public void validateWalletTopUpRequest(BindingResult results) {
+        if (results.hasErrors()) {
+            for (ObjectError error : results.getAllErrors()) {
+                if (CARRIFY909_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
+                    throw new ApiBadRequestException(CARRIFY909_MSG, CARRIFY909_CODE);
+                } else if (CARRIFY910_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
+                    throw new ApiBadRequestException(CARRIFY910_MSG, CARRIFY910_CODE);
+                } else if (CARRIFY911_CODE.equalsIgnoreCase(error.getDefaultMessage())) {
+                    throw new ApiBadRequestException(CARRIFY911_MSG, CARRIFY911_CODE);
+                }
+            }
+        }
     }
 }

@@ -20,6 +20,12 @@ public class ApiErrorConstants {
     public static final String CARRIFY907_MSG = "Phone number must have 9 digits.";
     public static final String CARRIFY908_CODE = "CARRIFY-908";
     public static final String CARRIFY908_MSG = "Invalid action parameter.";
+    public static final String CARRIFY909_CODE = "CARRIFY-909";
+    public static final String CARRIFY909_MSG = "Minimal top up value is 5 PLN.";
+    public static final String CARRIFY910_CODE = "CARRIFY-911";
+    public static final String CARRIFY910_MSG = "Wallet id can't be empty.";
+    public static final String CARRIFY911_CODE = "CARRIFY-911";
+    public static final String CARRIFY911_MSG = "Amount can't be empty";
 
 
     public static final String CARRIFY_INTERNAL_CODE = "CARRIFY_INTERNAL_SERVER_ERROR";
@@ -79,5 +85,6 @@ public class ApiErrorConstants {
     public static final String CARRIFY026_MSG = "Wallet not found.";
     public static final String CARRIFY027_CODE = "CARRIFY-027";
     public static final String CARRIFY027_MSG = "Wallet history not found.";
+
 
 }

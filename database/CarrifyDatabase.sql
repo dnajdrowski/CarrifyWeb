@@ -73,16 +73,14 @@ CREATE TABLE `role` (
 
 CREATE TABLE `user_wallet` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `user_id` int NOT NULL,
   `amount` int NOT NULL DEFAULT 0,
-  `last_update` datetime NOT NULL,
-  `operation_type` int DEFAULT 2
+  `last_transaction` datetime
 );
 
 CREATE TABLE `transaction` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `rent_id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `rent_id` int,
+  `wallet_id` int NOT NULL,
   `amount` int NOT NULL,
   `created_at` datetime NOT NULL
 );
@@ -154,11 +152,7 @@ ALTER TABLE `rent` ADD FOREIGN KEY (`car_id`) REFERENCES `car` (`id`);
 
 ALTER TABLE `rent_location_log` ADD FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`);
 
-ALTER TABLE `user_wallet` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
 ALTER TABLE `transaction` ADD FOREIGN KEY (`rent_id`) REFERENCES `rent` (`id`);
-
-ALTER TABLE `transaction` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `user_coupon` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 

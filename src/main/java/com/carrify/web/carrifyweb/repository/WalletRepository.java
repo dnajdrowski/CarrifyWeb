@@ -9,6 +9,5 @@ import java.util.Optional;
 @Repository
 public interface WalletRepository extends CrudRepository<Wallet, Integer> {
     Optional<Wallet> getFirstByUserIdOrderByIdDesc(int userId);
-
     Iterable<Wallet> findAllByUserId(int userId);
 }

@@ -76,12 +76,6 @@ public class User {
     @JsonManagedReference
     private List<Rent> rents = new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JsonManagedReference
-    private List<Wallet> wallets = new ArrayList<>();
-
     public User(int id) {
         this.id = id;
     }

@@ -9,16 +9,15 @@ import lombok.Setter;
 public class WalletDTO {
 
     private Integer id;
-    private String lastUpdate;
+    private String lastTransaction;
     private Integer amount;
-    private Integer operationType;
     private Integer user;
 
     public WalletDTO(Wallet wallet) {
         this.id = wallet.getId();
-        this.lastUpdate = CarrifyDateTimeFormatter.formatDate(wallet.getLastUpdate());
+        if(wallet.getLastTransaction() != null)
+            this.lastTransaction = CarrifyDateTimeFormatter.formatDate(wallet.getLastTransaction());
         this.amount = wallet.getAmount();
-        this.operationType = wallet.getOperationType();
         this.user = wallet.getUser().getId();
     }
 }

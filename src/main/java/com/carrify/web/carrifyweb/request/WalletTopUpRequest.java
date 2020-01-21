@@ -3,15 +3,19 @@ package com.carrify.web.carrifyweb.request;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.CARRIFY909_MSG;
 
 @Getter
 @Setter
 public class WalletTopUpRequest {
 
-    @NotBlank
+    @NotNull
+    @Min(value = 5, message = CARRIFY909_MSG)
     private Integer amount;
 
-    @NotBlank
-    private Integer userId;
+    @NotNull
+    private Integer walletId;
 }

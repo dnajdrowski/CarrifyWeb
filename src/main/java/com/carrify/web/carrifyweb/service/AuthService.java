@@ -13,7 +13,6 @@ import com.carrify.web.carrifyweb.repository.WalletRepository;
 import com.carrify.web.carrifyweb.request.AuthRequest;
 import com.carrify.web.carrifyweb.response.AuthResponse;
 import com.carrify.web.carrifyweb.security.JwtTokenProvider;
-import org.apache.tomcat.jni.Local;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
@@ -108,10 +106,8 @@ public class AuthService {
         Wallet userWallet = Wallet.builder()
                 .user(user)
                 .amount(0)
-                .lastUpdate(LocalDateTime.now())
-                .operationType(2)
+                .lastTransaction(null)
                 .build();
-
 
         String password = passwordEncoder.encode(user.getPassword());
         user.setPassword(password);

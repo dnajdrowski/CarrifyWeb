@@ -1,11 +1,14 @@
 package com.carrify.web.carrifyweb.model.Wallet;
 
+import com.carrify.web.carrifyweb.model.Transaction.Transaction;
 import com.carrify.web.carrifyweb.model.User.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,22 +19,24 @@ import java.time.LocalDateTime;
 public class Wallet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
+    @GeneratedValue
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "last_update", nullable = false)
-    private LocalDateTime lastUpdate;
+    @Column(name = "last_transaction")
+    private LocalDateTime lastTransaction;
 
     @Column(name = "amount", nullable = false)
     private Integer amount;
 
-    @Column(name = "operation_type", nullable = false)
-    private Integer operationType;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id")
     private User user;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "wallet", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    List<Transaction> transactions = new ArrayList<>();
 
 }
