@@ -1,18 +1,16 @@
 package com.carrify.web.carrifyweb.service;
 
+import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
 import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Coupon.Coupon;
 import com.carrify.web.carrifyweb.model.Transaction.Transaction;
 import com.carrify.web.carrifyweb.model.User.User;
+import com.carrify.web.carrifyweb.model.UserCoupon;
 import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.carrify.web.carrifyweb.model.Wallet.WalletDTO;
-import com.carrify.web.carrifyweb.repository.CouponRepository;
-import com.carrify.web.carrifyweb.repository.TransactionRepository;
-import com.carrify.web.carrifyweb.repository.UserRepository;
-import com.carrify.web.carrifyweb.repository.WalletRepository;
+import com.carrify.web.carrifyweb.repository.*;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -26,13 +24,15 @@ public class CouponService {
     private final TransactionRepository transactionRepository;
     private final CouponRepository couponRepository;
     private final UserRepository userRepository;
+    private final UserCouponRepository userCouponRepository;
 
     public CouponService(WalletRepository walletRepository, TransactionRepository transactionRepository,
-                         CouponRepository couponRepository, UserRepository userRepository) {
+                         CouponRepository couponRepository, UserRepository userRepository, UserCouponRepository userCouponRepository) {
         this.walletRepository = walletRepository;
         this.transactionRepository = transactionRepository;
         this.couponRepository = couponRepository;
         this.userRepository = userRepository;
+        this.userCouponRepository = userCouponRepository;
     }
 
     public WalletDTO useCoupon(String userId, String couponValue) {
@@ -57,6 +57,12 @@ public class CouponService {
 
         Coupon coupon = couponOptional.get();
 
+        Optional<UserCoupon> userCouponOptional = userCouponRepository.findByUserIdAndCouponId(id, coupon.getId());
+
+        if (userCouponOptional.isPresent()) {
+            throw new ApiBadRequestException(CARRIFY030_MSG, CARRIFY030_CODE);
+        }
+
         Optional<Wallet> walletOptional = walletRepository.findById(id);
         if (walletOptional.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY026_MSG, CARRIFY026_CODE);
@@ -75,13 +81,16 @@ public class CouponService {
                 .wallet(wallet)
                 .build();
 
+        UserCoupon userCoupon = UserCoupon.builder()
+                .coupon(coupon)
+                .user(userOptional.get())
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        UserCoupon savedUserCoupon = userCouponRepository.save(userCoupon);
         Wallet savedWallet = walletRepository.save(wallet);
         Transaction savedTransaction = transactionRepository.save(transaction);
-
-        if (savedWallet == null || savedTransaction == null) {
-            throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
-        }
-
+        
         return new WalletDTO(savedWallet);
 
     }
