@@ -180,7 +180,7 @@ public class RentService {
         carRepository.save(car);
 
         LocalDateTime rentalStartTime = rent.getCreatedAt();
-        LocalDateTime rentalFinishTime = LocalDateTime.now().plusHours(2);
+        LocalDateTime rentalFinishTime = LocalDateTime.now();
         long rentTimeInMinutes = Duration.between(rentalStartTime, rentalFinishTime).toMinutes();
         int amount = 2000 / 1000 * pricePerKm + (int) rentTimeInMinutes * pricePerMinute;
         rent.setEndAt(rentalFinishTime);
@@ -254,7 +254,7 @@ public class RentService {
 
         Rent rent = Rent.builder()
                 .distance(0)
-                .createdAt(LocalDateTime.now().plusHours(2))
+                .createdAt(LocalDateTime.now())
                 .car(carOptional.get())
                 .user(userOptional.get())
                 .build();

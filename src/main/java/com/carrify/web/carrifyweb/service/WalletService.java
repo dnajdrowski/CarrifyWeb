@@ -64,7 +64,7 @@ public class WalletService {
                 .amount(amount)
                 .balance(balance)
                 .operationType(0)
-                .createdAt(LocalDateTime.now().plusHours(2))
+                .createdAt(LocalDateTime.now())
                 .wallet(wallet)
                 .build();
 
