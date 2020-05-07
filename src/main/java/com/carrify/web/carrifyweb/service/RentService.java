@@ -180,7 +180,7 @@ public class RentService {
         carRepository.save(car);
 
         LocalDateTime rentalStartTime = rent.getCreatedAt();
-        LocalDateTime rentalFinishTime = LocalDateTime.now();
+        LocalDateTime rentalFinishTime = LocalDateTime.now().plusHours(2);
         long rentTimeInMinutes = Duration.between(rentalStartTime, rentalFinishTime).toMinutes();
         int amount = 2000 / 1000 * pricePerKm + (int) rentTimeInMinutes * pricePerMinute;
         rent.setEndAt(rentalFinishTime);
@@ -252,10 +252,9 @@ public class RentService {
             throw new ApiBadRequestException(CARRIFY017_MSG, CARRIFY017_CODE);
         }
 
-        log.info(LocalDateTime.now().toString());
         Rent rent = Rent.builder()
                 .distance(0)
-                .createdAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now().plusHours(2))
                 .car(carOptional.get())
                 .user(userOptional.get())
                 .build();
