@@ -1,4 +1,4 @@
-package com.carrify.web.carrifyweb.model;
+package com.carrify.web.carrifyweb.model.UserCoupon;
 import com.carrify.web.carrifyweb.model.Coupon.Coupon;
 import com.carrify.web.carrifyweb.model.User.User;
 import lombok.*;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class UserCoupon {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 

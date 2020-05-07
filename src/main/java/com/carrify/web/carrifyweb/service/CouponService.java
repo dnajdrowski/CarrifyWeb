@@ -1,12 +1,11 @@
 package com.carrify.web.carrifyweb.service;
 
 import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
-import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Coupon.Coupon;
 import com.carrify.web.carrifyweb.model.Transaction.Transaction;
 import com.carrify.web.carrifyweb.model.User.User;
-import com.carrify.web.carrifyweb.model.UserCoupon;
+import com.carrify.web.carrifyweb.model.UserCoupon.UserCoupon;
 import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.carrify.web.carrifyweb.model.Wallet.WalletDTO;
 import com.carrify.web.carrifyweb.repository.*;
@@ -90,7 +89,7 @@ public class CouponService {
         UserCoupon savedUserCoupon = userCouponRepository.save(userCoupon);
         Wallet savedWallet = walletRepository.save(wallet);
         Transaction savedTransaction = transactionRepository.save(transaction);
-        
+
         return new WalletDTO(savedWallet);
 
     }

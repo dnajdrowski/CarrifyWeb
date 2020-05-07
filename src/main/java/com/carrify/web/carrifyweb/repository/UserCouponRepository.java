@@ -1,6 +1,6 @@
 package com.carrify.web.carrifyweb.repository;
 
-import com.carrify.web.carrifyweb.model.UserCoupon;
+import com.carrify.web.carrifyweb.model.UserCoupon.UserCoupon;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
