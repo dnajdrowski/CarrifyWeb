@@ -1,0 +1,26 @@
+package com.carrify.web.carrifyweb.controller;
+
+import com.carrify.web.carrifyweb.request.CouponRequest;
+import com.carrify.web.carrifyweb.service.CouponService;
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+@Slf4j
+@RestController
+@Api(tags = "Coupon Controller")
+@RequestMapping("api/coupons")
+public class CouponController {
+
+    private final CouponService couponService;
+
+    public CouponController(CouponService couponService) { this.couponService = couponService; }
+
+    @PostMapping("/user/{id}/use")
+    public ResponseEntity useCoupon(@PathVariable("id") String id, @Valid @RequestBody CouponRequest couponRequest) {
+        return ResponseEntity.ok(couponService.useCoupon(id, couponRequest.getValue()));
+    }
+}

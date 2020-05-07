@@ -87,6 +87,8 @@ public class ApiErrorConstants {
     public static final String CARRIFY027_MSG = "Wallet history not found.";
     public static final String CARRIFY028_CODE = "CARRIFY-028";
     public static final String CARRIFY028_MSG = "Not enough money in wallet.";
+    public static final String CARRIFY029_CODE = "CARRIFY-029";
+    public static final String CARRIFY029_MSG = "Coupon not found";
 
 
 }
