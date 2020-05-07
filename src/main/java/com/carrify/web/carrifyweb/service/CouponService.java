@@ -35,7 +35,7 @@ public class CouponService {
         this.userRepository = userRepository;
     }
 
-    public String useCoupon(String userId, String couponValue) {
+    public WalletDTO useCoupon(String userId, String couponValue) {
         int id;
         try {
             id = Integer.parseInt(userId);
@@ -82,7 +82,7 @@ public class CouponService {
             throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
         }
 
-        return "Coupon has been used successfully!";
+        return new WalletDTO(savedWallet);
 
     }
 }

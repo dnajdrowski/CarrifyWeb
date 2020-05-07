@@ -1,5 +1,6 @@
 package com.carrify.web.carrifyweb.controller;
 
+import com.carrify.web.carrifyweb.model.Wallet.WalletDTO;
 import com.carrify.web.carrifyweb.request.CouponRequest;
 import com.carrify.web.carrifyweb.service.CouponService;
 import io.swagger.annotations.Api;
@@ -20,7 +21,7 @@ public class CouponController {
     public CouponController(CouponService couponService) { this.couponService = couponService; }
 
     @PostMapping("/user/{id}/use")
-    public ResponseEntity useCoupon(@PathVariable("id") String id, @Valid @RequestBody CouponRequest couponRequest) {
+    public ResponseEntity<WalletDTO> useCoupon(@PathVariable("id") String id, @Valid @RequestBody CouponRequest couponRequest) {
         return ResponseEntity.ok(couponService.useCoupon(id, couponRequest.getValue()));
     }
 }
