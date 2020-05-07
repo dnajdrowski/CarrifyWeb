@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "coupon")
+@Entity(name = "coupons")
 public class Coupon {
 
     @Id
