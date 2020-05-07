@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface UserCouponRepository extends CrudRepository<UserCoupon, Integer> {
 
     Optional<UserCoupon> findByUserIdAndCouponId(int userId, int couponId);
+    Iterable<UserCoupon> findAllByUserId(int userId);
 }

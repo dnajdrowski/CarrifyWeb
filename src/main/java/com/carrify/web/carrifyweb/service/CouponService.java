@@ -3,18 +3,24 @@ package com.carrify.web.carrifyweb.service;
 import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Coupon.Coupon;
+import com.carrify.web.carrifyweb.model.Rent.Rent;
+import com.carrify.web.carrifyweb.model.Rent.RentDTO;
 import com.carrify.web.carrifyweb.model.Transaction.Transaction;
 import com.carrify.web.carrifyweb.model.User.User;
 import com.carrify.web.carrifyweb.model.UserCoupon.UserCoupon;
+import com.carrify.web.carrifyweb.model.UserCoupon.UserCouponDTO;
 import com.carrify.web.carrifyweb.model.Wallet.Wallet;
 import com.carrify.web.carrifyweb.model.Wallet.WalletDTO;
 import com.carrify.web.carrifyweb.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class CouponService {
@@ -32,6 +38,26 @@ public class CouponService {
         this.couponRepository = couponRepository;
         this.userRepository = userRepository;
         this.userCouponRepository = userCouponRepository;
+    }
+
+    public List<UserCouponDTO> getAllUserUsedCoupons(String userId) {
+        int id;
+        try {
+            id = Integer.parseInt(userId);
+        } catch (NumberFormatException e) {
+            throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
+        }
+
+        Iterable<UserCoupon> userCoupons = userCouponRepository.findAllByUserId(id);
+        List<UserCouponDTO> userCouponCollected = StreamSupport.stream(userCoupons.spliterator(), false)
+                .map(UserCouponDTO::new)
+                .collect(toList());
+
+        if (userCouponCollected.isEmpty()) {
+            throw new ApiNotFoundException(CARRIFY012_MSG, CARRIFY012_CODE);
+        }
+        return userCouponCollected;
+
     }
 
     public WalletDTO useCoupon(String userId, String couponValue) {
