@@ -8,6 +8,10 @@ import lombok.Setter;
 @Setter
 public class TransactionDTO {
 
+    public static final int TYPE_TOP_UP = 0;
+    public static final int TYPE_CHARGE = 1;
+    public static final int TYPE_COUPON = 2;
+
     private Integer id;
     private Integer amount;
     private Integer operationType;

@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
+import static com.carrify.web.carrifyweb.model.Transaction.TransactionDTO.TYPE_CHARGE;
 import static java.util.stream.Collectors.toList;
 
 
@@ -208,7 +209,7 @@ public class RentService {
         Transaction transaction = Transaction.builder()
                 .amount(amount)
                 .balance(balance)
-                .operationType(1)
+                .operationType(TYPE_CHARGE)
                 .createdAt(rentalFinishTime)
                 .rent(rent)
                 .wallet(wallet)

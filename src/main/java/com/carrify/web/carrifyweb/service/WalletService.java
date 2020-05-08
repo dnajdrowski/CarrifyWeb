@@ -1,7 +1,6 @@
 package com.carrify.web.carrifyweb.service;
 
 import com.carrify.web.carrifyweb.exception.ApiBadRequestException;
-import com.carrify.web.carrifyweb.exception.ApiInternalServerError;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Transaction.Transaction;
 import com.carrify.web.carrifyweb.model.Transaction.TransactionDTO;
@@ -15,12 +14,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.*;
+import static com.carrify.web.carrifyweb.model.Transaction.TransactionDTO.TYPE_TOP_UP;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -63,17 +62,13 @@ public class WalletService {
         Transaction transaction = Transaction.builder()
                 .amount(amount)
                 .balance(balance)
-                .operationType(0)
+                .operationType(TYPE_TOP_UP)
                 .createdAt(LocalDateTime.now())
                 .wallet(wallet)
                 .build();
 
-        Wallet savedWallet = walletRepository.save(wallet);
-        Transaction savedTransaction = transactionRepository.save(transaction);
-
-        if (savedWallet == null || savedTransaction == null) {
-            throw new ApiInternalServerError(CARRIFY_INTERNAL_MSG, CARRIFY_INTERNAL_CODE);
-        }
+        walletRepository.save(wallet);
+        transactionRepository.save(transaction);
 
         return new WalletDTO(wallet);
     }

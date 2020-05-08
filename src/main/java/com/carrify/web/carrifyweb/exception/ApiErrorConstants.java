@@ -91,5 +91,12 @@ public class ApiErrorConstants {
     public static final String CARRIFY029_MSG = "Coupon not found";
     public static final String CARRIFY030_CODE = "CARRIFY-030";
     public static final String CARRIFY030_MSG = "Coupon has been used!";
+    public static final String CARRIFY031_CODE = "CARRIFY-031";
+    public static final String CARRIFY031_MSG = "Coupons has not been used yet.";
+    public static final String CARRIFY032_CODE = "CARRIFY-032";
+    public static final String CARRIFY032_MSG = "Coupon is not available.";
+    public static final String CARRIFY033_CODE = "CARRIFY-033";
+    public static final String CARRIFY033_MSG = "Coupon has expired.";
+
 
 }
