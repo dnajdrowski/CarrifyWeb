@@ -9,9 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class ReservationRequest {
 
-    @NotBlank
     private Integer userId;
-
-    @NotBlank
     private Integer carId;
+
 }

@@ -189,7 +189,7 @@ public class RentService {
         Optional<Wallet> optionalWallet = walletRepository.findById(rent.getUser().getId());
 
         if (optionalWallet.isEmpty()) {
-            //TODO
+            throw new ApiNotFoundException(CARRIFY026_MSG, CARRIFY026_CODE);
         }
 
         Wallet wallet = optionalWallet.get();
