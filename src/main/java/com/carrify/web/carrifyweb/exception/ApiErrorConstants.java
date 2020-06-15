@@ -97,6 +97,8 @@ public class ApiErrorConstants {
     public static final String CARRIFY032_MSG = "Coupon is not available.";
     public static final String CARRIFY033_CODE = "CARRIFY-033";
     public static final String CARRIFY033_MSG = "Coupon has expired.";
+    public static final String CARRIFY034_CODE = "CARRIFY-034";
+    public static final String CARRIFY034_MSG = "Car or user has active reservation.";
 
 
 }

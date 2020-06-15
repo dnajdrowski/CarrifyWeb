@@ -3,9 +3,9 @@ package com.carrify.web.carrifyweb.service;
 import com.carrify.web.carrifyweb.exception.ApiNotFoundException;
 import com.carrify.web.carrifyweb.model.Car.Car;
 import com.carrify.web.carrifyweb.model.Car.CarDTO;
-import com.carrify.web.carrifyweb.repository.CarRepository;
 import com.carrify.web.carrifyweb.model.CarLocationLog.CarLocationLog;
 import com.carrify.web.carrifyweb.repository.CarLocationLogRepository;
+import com.carrify.web.carrifyweb.repository.CarRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,10 +36,14 @@ public class CarService {
                     return new CarDTO(car);
                 })
                 .collect(toList());
-        if(collectedCars.isEmpty()) {
+        if (collectedCars.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY001_MSG, CARRIFY001_CODE);
         }
 
         return collectedCars;
+    }
+
+    public boolean existsCarWithCarId(Integer carId) {
+        return carRepository.findById(carId).isPresent();
     }
 }

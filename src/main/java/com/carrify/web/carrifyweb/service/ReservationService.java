@@ -8,7 +8,9 @@ import com.carrify.web.carrifyweb.repository.ReservationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 import static com.carrify.web.carrifyweb.exception.ApiErrorConstants.CARRIFY008_CODE;
@@ -31,7 +33,7 @@ public class ReservationService {
                 .map(ReservationDTO::new)
                 .collect(toList());
 
-        if(reservationsCollected.isEmpty()) {
+        if (reservationsCollected.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
         }
         return reservationsCollected;
@@ -41,16 +43,12 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public List<ReservationDTO> getAllUserReservations(Integer userId) {
-        Iterable<Reservation> reservations = reservationRepository.findAllByUser_Id(userId);
-        List<ReservationDTO> reservationsCollected = StreamSupport.stream(reservations.spliterator(), false)
-                .map(ReservationDTO::new)
-                .collect(toList());
-
-        if(reservationsCollected.isEmpty()) {
+    public Reservation getAllUserReservations(Integer userId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findOneByUserId(userId);
+        if (optionalReservation.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
         }
-        return reservationsCollected;
+        return optionalReservation.get();
     }
 
     public List<ReservationDTO> getAllCarReservations(Integer carId) {
@@ -59,9 +57,14 @@ public class ReservationService {
                 .map(ReservationDTO::new)
                 .collect(toList());
 
-        if(reservationsCollected.isEmpty()) {
+        if (reservationsCollected.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
         }
         return reservationsCollected;
+    }
+
+    public boolean existsReservationOnCarOrUser(Integer carId, Integer userId) {
+        Optional<Reservation> optionalReservation = reservationRepository.getActiveByCarIdOrUserId(carId, userId, LocalDateTime.now());
+        return optionalReservation.isEmpty();
     }
 }

@@ -32,4 +32,8 @@ public class UserService {
         Optional<User> user = userRepository.findByToken(token);
         return user.filter(value -> userId.equals(value.getId())).isPresent();
     }
+
+    public boolean existsUserWithUserId(Integer userId) {
+        return userRepository.findById(userId).isPresent();
+    }
 }
