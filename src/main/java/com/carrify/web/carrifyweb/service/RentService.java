@@ -40,6 +40,7 @@ public class RentService {
     private final VariableRepository variableRepository;
     private final TransactionRepository transactionRepository;
     private final WalletRepository walletRepository;
+    private final ReservationService reservationService;
 
     @Transactional
     public List<RentDTO> getAllRents() {
@@ -252,6 +253,9 @@ public class RentService {
         if (rentRepository.findFirstByCar_IdAndEndAtIsNull(carId).isPresent()) {
             throw new ApiBadRequestException(CARRIFY017_MSG, CARRIFY017_CODE);
         }
+
+        if (reservationService.existsReservationOnOtherCarByUserId(userId, carId))
+            throw new ApiBadRequestException(CARRIFY035_MSG, CARRIFY035_CODE);
 
         Rent rent = Rent.builder()
                 .distance(0)

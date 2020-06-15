@@ -42,7 +42,7 @@ public class ReservationController {
     }
 
     @PostMapping("/new-reservation")
-    public ResponseEntity<Reservation> addNewReservation(@Valid @RequestBody ReservationRequest reservationRequest, BindingResult bindingResult) {
+    public ResponseEntity<ReservationDTO> addNewReservation(@Valid @RequestBody ReservationRequest reservationRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new ApiNotFoundException(CARRIFY001_MSG, CARRIFY001_CODE);
         } else {
@@ -64,7 +64,7 @@ public class ReservationController {
                                 .user(user)
                                 .build();
                         Reservation newReservation = reservationService.addNewReservation(reservation);
-                        return ResponseEntity.ok(newReservation);
+                        return ResponseEntity.ok(new ReservationDTO(newReservation));
                     } else
                         throw new ApiNotFoundException(CARRIFY034_MSG, CARRIFY034_CODE);
                 } else
@@ -75,7 +75,7 @@ public class ReservationController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<Reservation> getUserReservation(@PathVariable("id") String id) {
+    public ResponseEntity<ReservationDTO> getUserReservation(@PathVariable("id") String id) {
         int userId;
         try {
             userId = Integer.parseInt(id);
@@ -83,29 +83,10 @@ public class ReservationController {
             throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
         }
         if (userService.existsUserWithUserId(userId)) {
-            return ResponseEntity.ok(reservationService.getAllUserReservations(userId));
+            return ResponseEntity.ok(new ReservationDTO(reservationService.getUserReservation(userId)));
         } else {
             throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
         }
     }
 
-    @GetMapping("/car/{id}/all")
-    public ResponseEntity<List<ReservationDTO>> showAllCarReservations(@PathVariable("id") String id) {
-        int carId;
-        try {
-            carId = Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            throw new ApiNotFoundException(CARRIFY001_MSG, CARRIFY001_CODE);
-        }
-        if (userService.existsUserWithUserId(carId)) {
-            List<ReservationDTO> reservations = reservationService.getAllCarReservations(carId);
-            if (!reservations.isEmpty()) {
-                return ResponseEntity.ok(reservations);
-            } else {
-                throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
-            }
-        } else {
-            throw new ApiNotFoundException(CARRIFY001_MSG, CARRIFY001_CODE);
-        }
-    }
 }

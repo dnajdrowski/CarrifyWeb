@@ -43,7 +43,7 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public Reservation getAllUserReservations(Integer userId) {
+    public Reservation getUserReservation(Integer userId) {
         Optional<Reservation> optionalReservation = reservationRepository.findOneByUserId(userId);
         if (optionalReservation.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
@@ -66,5 +66,10 @@ public class ReservationService {
     public boolean existsReservationOnCarOrUser(Integer carId, Integer userId) {
         Optional<Reservation> optionalReservation = reservationRepository.getActiveByCarIdOrUserId(carId, userId, LocalDateTime.now());
         return optionalReservation.isEmpty();
+    }
+
+    public boolean existsReservationOnOtherCarByUserId(Integer userId, Integer carId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findActiveReservationByUserId(userId, carId, LocalDateTime.now());
+        return optionalReservation.isPresent();
     }
 }
