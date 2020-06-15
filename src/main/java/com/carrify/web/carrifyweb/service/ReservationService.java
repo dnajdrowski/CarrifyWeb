@@ -6,6 +6,7 @@ import com.carrify.web.carrifyweb.model.Reservation.Reservation;
 import com.carrify.web.carrifyweb.model.Reservation.ReservationDTO;
 import com.carrify.web.carrifyweb.repository.ReservationRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -51,18 +52,6 @@ public class ReservationService {
         return optionalReservation.get();
     }
 
-    public List<ReservationDTO> getAllCarReservations(Integer carId) {
-        Iterable<Reservation> reservations = reservationRepository.findAllByCar_Id(carId);
-        List<ReservationDTO> reservationsCollected = StreamSupport.stream(reservations.spliterator(), false)
-                .map(ReservationDTO::new)
-                .collect(toList());
-
-        if (reservationsCollected.isEmpty()) {
-            throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
-        }
-        return reservationsCollected;
-    }
-
     public boolean existsReservationOnCarOrUser(Integer carId, Integer userId) {
         Optional<Reservation> optionalReservation = reservationRepository.getActiveByCarIdOrUserId(carId, userId, LocalDateTime.now());
         return optionalReservation.isEmpty();
@@ -71,5 +60,24 @@ public class ReservationService {
     public boolean existsReservationOnOtherCarByUserId(Integer userId, Integer carId) {
         Optional<Reservation> optionalReservation = reservationRepository.findActiveReservationByUserId(userId, carId, LocalDateTime.now());
         return optionalReservation.isPresent();
+    }
+
+    public void changeStateOfReservationIfExists(Integer userId, Integer carId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findActiveReservationByUserId(userId, carId, LocalDateTime.now());
+        optionalReservation.ifPresent(reservation -> {
+            reservation.setState(0);
+            reservationRepository.save(reservation);
+        });
+    }
+
+    public ResponseEntity cancelReservation(int reservationId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
+        if (optionalReservation.isPresent()) {
+            Reservation reservation = optionalReservation.get();
+            reservation.setState(0);
+            reservationRepository.save(reservation);
+            return ResponseEntity.ok().build();
+        } else
+            throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
     }
 }

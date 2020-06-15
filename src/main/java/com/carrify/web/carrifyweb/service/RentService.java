@@ -257,6 +257,8 @@ public class RentService {
         if (reservationService.existsReservationOnOtherCarByUserId(userId, carId))
             throw new ApiBadRequestException(CARRIFY035_MSG, CARRIFY035_CODE);
 
+        reservationService.changeStateOfReservationIfExists(userId, carId);
+
         Rent rent = Rent.builder()
                 .distance(0)
                 .createdAt(LocalDateTime.now())

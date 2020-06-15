@@ -89,4 +89,15 @@ public class ReservationController {
         }
     }
 
+    @GetMapping("/cancel/{id}")
+    public ResponseEntity cancelReservation(@PathVariable("id") String id) {
+        int reservationId;
+        try {
+            reservationId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new ApiNotFoundException(CARRIFY009_MSG, CARRIFY009_CODE);
+        }
+        return reservationService.cancelReservation(reservationId);
+    }
+
 }
