@@ -145,10 +145,6 @@ public class RentService {
 
         Rent rent = rentOptional.get();
 
-        if (rent.getEndAt() != null) {
-            throw new ApiBadRequestException(CARRIFY015_MSG, CARRIFY015_CODE);
-        }
-
         Optional<Car> carOptional = carRepository.findById(rent.getCar().getId());
 
         if (carOptional.isEmpty()) {
