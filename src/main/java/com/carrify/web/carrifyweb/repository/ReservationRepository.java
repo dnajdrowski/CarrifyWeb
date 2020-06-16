@@ -15,7 +15,7 @@ public interface ReservationRepository extends CrudRepository<Reservation, Integ
     @Query(value = "SELECT r.* FROM reservation r WHERE r.user_id = ?1 and ?2 between r.created_at and r.finished_at and r.state = 1", nativeQuery = true)
     Optional<Reservation> findOneByUserId(Integer userId, LocalDateTime now);
 
-    @Query(value = "SELECT r.* FROM reservation r WHERE (r.car_id = ?1 or r.user_id = ?2) and ?3 between r.created_at and r.finished_at", nativeQuery = true)
+    @Query(value = "SELECT r.* FROM reservation r WHERE (r.car_id = ?1 or r.user_id = ?2) and r.state = 1 and ?3 between r.created_at and r.finished_at", nativeQuery = true)
     Optional<Reservation> getActiveByCarIdOrUserId(Integer carId, Integer userId, LocalDateTime now);
 
     @Query(value = "SELECT r.* FROM reservation r WHERE r.car_id <> ?1 and r.user_id = ?2 and ?3 between r.created_at and r.finished_at and r.state = 1", nativeQuery = true)
