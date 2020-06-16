@@ -45,7 +45,7 @@ public class ReservationService {
     }
 
     public Reservation getUserReservation(Integer userId) {
-        Optional<Reservation> optionalReservation = reservationRepository.findOneByUserId(userId);
+        Optional<Reservation> optionalReservation = reservationRepository.findOneByUserId(userId, LocalDateTime.now());
         if (optionalReservation.isEmpty()) {
             throw new ApiNotFoundException(CARRIFY008_MSG, CARRIFY008_CODE);
         }
